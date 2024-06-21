@@ -9,6 +9,8 @@ import type { StatusTask } from './statusTask';
 import type { TaskType } from './taskType';
 
 export interface TaskDTO {
+  /** @nullable */
+  address: string | null;
   createdDateTime: string;
   defectStatus: DefectStatus;
   existDefectInfo: boolean;

@@ -7,10 +7,10 @@
 
 export interface FixationDefectShortInfoDTO {
   /** @nullable */
+  address: string | null;
+  /** @nullable */
   damagedCanvasSquareMeter: number | null;
   /** @nullable */
   defectTypeName: string | null;
-  /** @nullable */
-  exactAddress: string | null;
   id: string;
 }

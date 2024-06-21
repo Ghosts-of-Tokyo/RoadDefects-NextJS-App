@@ -9,14 +9,10 @@ import type { PhotoInfoDTO } from './photoInfoDTO';
 
 export interface FixationDefectDTO {
   /** @nullable */
-  coordinatesX: number | null;
-  /** @nullable */
-  coordinatesY: number | null;
+  address: string | null;
   /** @nullable */
   damagedCanvasSquareMeter: number | null;
   defectType: DefectTypeDTO;
-  /** @nullable */
-  exactAddress: string | null;
   id: string;
   isEliminated: boolean;
   /** @nullable */

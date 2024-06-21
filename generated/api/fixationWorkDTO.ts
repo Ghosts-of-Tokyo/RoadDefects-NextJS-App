@@ -13,6 +13,5 @@ export interface FixationWorkDTO {
   recordedDateTime: string;
   /** @nullable */
   workDone: boolean | null;
-  /** @nullable */
-  workDoneWithDefect: boolean | null;
+  workDoneWithDefect: boolean;
 }

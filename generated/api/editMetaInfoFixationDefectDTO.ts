@@ -5,7 +5,6 @@
  * OpenAPI spec version: 1.0
  */
 
-export interface EditFixationDefectDTO {
-  damagedCanvasSquareMeter: number;
-  defectTypeId: string;
+export interface EditMetaInfoFixationDefectDTO {
+  recordedDateTime: string;
 }
