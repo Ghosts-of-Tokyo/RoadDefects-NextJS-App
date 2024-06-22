@@ -5,7 +5,10 @@ export const ROUTES = {
   TASKS: {
     ROOT: '/tasks',
     TASK: (taskId: string) => `/tasks/${taskId}`,
-    FIXATION: (taskId: string) => `/tasks/${taskId}/fixation`
+    FIXATION: {
+      DEFECT: (taskId: string) => `/tasks/${taskId}/fixation/defect`,
+      WORK: (taskId: string) => `/tasks/${taskId}/fixation/work`
+    }
   },
 
   LOGIN: '/login'

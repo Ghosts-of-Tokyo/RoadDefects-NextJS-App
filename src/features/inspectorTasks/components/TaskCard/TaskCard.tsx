@@ -1,10 +1,18 @@
 import { Typography } from '@/components/typography';
-import { TaskDTO } from '@generated/api';
+import { FixationDefectTaskDTO, TaskDTO } from '@generated/api';
 import { getTaskStatusColor, getTaskStatusText } from '../../helpers/getTaskStatusColor';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
+import { ROUTES } from '@/utils/constants/routes';
 
-export const TaskCard = (task: TaskDTO) => {
-  return (
+export const TaskCard = (task: TaskDTO) => (
+  <Link
+    href={
+      task.taskType === 'FixationDefectTask'
+        ? ROUTES.TASKS.FIXATION.DEFECT(task.id)
+        : ROUTES.TASKS.FIXATION.WORK(task.id)
+    }
+  >
     <div className='border-b-2 p-4'>
       <div className='flex justify-between'>
         <Typography tag='h6' variant='h7'>
@@ -26,5 +34,5 @@ export const TaskCard = (task: TaskDTO) => {
         </Typography>
       )}
     </div>
-  );
-};
+  </Link>
+);
