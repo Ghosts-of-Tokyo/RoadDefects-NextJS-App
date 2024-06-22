@@ -8,7 +8,7 @@ export const useGetTaskOwnQuery = (
   settings?: QuerySettings<typeof getTaskOwn>
 ) =>
   useQuery({
-    queryKey: ['getTaskOwn', params.TaskStatus],
+    queryKey: ['getTaskOwn', params.TaskStatus, params.Address],
     queryFn: () => getTaskOwn({ params, config: settings?.config }),
     ...settings?.options
   });

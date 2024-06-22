@@ -1,30 +1,29 @@
 'use client';
 
 import { Typography } from '@/components/typography';
-import { ScrollArea, ScrollBar, Tabs, TabsList, TabsTrigger } from '@/components/ui';
-import { useGetTaskOwnQuery } from '@/shared/api/hooks';
-import { useSearchParams } from '@/utils/hooks';
+import { Input, ScrollArea, ScrollBar, Tabs, TabsList, TabsTrigger } from '@/components/ui';
 import { useInspectorTasks } from './hooks/useInspectorTasks';
 import { StatusTask } from '@generated/api';
 import { getTaskStatusText } from './helpers/getTaskStatusColor';
 import { TaskCard } from './components/TaskCard/TaskCard';
 
 export const InspectorTasks = () => {
-  const { searchParams } = useSearchParams();
-  const taskStatus = searchParams.get('TaskStatus') ?? '';
-  const { functions } = useInspectorTasks();
-
-  const { data } = useGetTaskOwnQuery({
-    TaskStatus: taskStatus
-  });
+  const { state, functions } = useInspectorTasks();
 
   return (
     <div className='space-y-2'>
-      <Typography tag='h2' variant='h1'>
+      <Typography tag='h3' variant='h3' className='mb-2'>
         Назначенные задачи
       </Typography>
-      <ScrollArea className='w-full space-y-3 whitespace-nowrap'>
-        <Tabs defaultValue={searchParams.get('TaskStatus') ?? ''}>
+
+      <Input
+        placeholder='Адрес'
+        defaultValue={state.addressFilter}
+        onChange={(event) => functions.onAddressFilterChange(event.target.value)}
+      />
+
+      <ScrollArea className='w-full space-y-1 whitespace-nowrap'>
+        <Tabs defaultValue={state.taskStatus}>
           <TabsList className='flex w-full justify-start gap-1 bg-transparent p-0'>
             <TabsTrigger
               value='None'
@@ -46,8 +45,9 @@ export const InspectorTasks = () => {
         </Tabs>
         <ScrollBar orientation='horizontal' />
       </ScrollArea>
+
       <div className='space-y-4'>
-        {data?.data.tasks?.map((task, index) => <TaskCard key={index} {...task} />)}
+        {state.data?.data.tasks?.map((task, index) => <TaskCard key={index} {...task} />)}
       </div>
     </div>
   );

@@ -5,12 +5,12 @@ import { cn } from '@/lib/utils';
 
 export const TaskCard = (task: TaskDTO) => {
   return (
-    <div className='rounded-lg border-2 p-4'>
+    <div className='border-b-2 p-4'>
       <div className='flex justify-between'>
-        <Typography tag='h5' variant='h5'>
+        <Typography tag='h6' variant='h7'>
           {task.id}
         </Typography>
-        <Typography tag='h5' variant='h5' className={cn(getTaskStatusColor(task.taskStatus))}>
+        <Typography tag='h5' variant='h7' className={cn(getTaskStatusColor(task.taskStatus))}>
           {getTaskStatusText(task.taskStatus)}
         </Typography>
       </div>

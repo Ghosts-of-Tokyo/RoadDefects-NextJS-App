@@ -21,6 +21,21 @@ interface QuerySettings<Func = unknown> {
   >;
 }
 
+interface InfiniteQuerySettings<Func = unknown> {
+  config?: ApiRequestConfig;
+  options?: Omit<
+    import('@tanstack/react-query').UseInfiniteQueryOptions<
+      Awaited<ReturnTyp<Func>>,
+      any,
+      Awaited<ReturnTyp<Func>>,
+      any,
+      import('@tanstack/react-query').QueryKey,
+      number
+    >,
+    'queryKey'
+  >;
+}
+
 type ApiRequestConfig = import('axios').AxiosRequestConfig;
 
 type RequestConfig<Params = undefined> = Params extends undefined

@@ -3,7 +3,10 @@ import type { TaskPagedDTO } from '@generated/api';
 import { instance } from '../../../instance';
 
 export type GetTaskOwnParams = {
-  TaskStatus: string;
+  TaskStatus?: string;
+  Address?: string;
+  current?: number;
+  size?: number;
 };
 
 export type GetTaskOwnRequestConfig = RequestConfig<GetTaskOwnParams>;

@@ -1,13 +1,19 @@
+import { useGetTaskOwnQuery } from '@/shared/api/hooks';
 import { useSearchParams } from '@/utils/hooks';
 import { useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
-import { startTransition, useState } from 'react';
+import { startTransition } from 'react';
 
 export const useInspectorTasks = () => {
-  const { setSearchParam, searchParams } = useSearchParams();
-  const router = useRouter();
+  const { searchParams, setSearchParams, setSearchParam } = useSearchParams();
   const queryClient = useQueryClient();
-  const [taskStatus, setTaskStatus] = useState(searchParams.get('TaskStatus') ?? '');
+
+  const taskStatus = searchParams.get('TaskStatus') ?? 'None';
+  const addressFilter = searchParams.get('Address') ?? '';
+
+  const { data } = useGetTaskOwnQuery({
+    TaskStatus: taskStatus,
+    Address: addressFilter
+  });
 
   const onTaskStatusClick = (taskStatus: string) => {
     queryClient.invalidateQueries({ queryKey: ['getTaskOwn', taskStatus] });
@@ -16,5 +22,18 @@ export const useInspectorTasks = () => {
     });
   };
 
-  return { state: { taskStatus }, functions: { onTaskStatusClick } };
+  const onAddressFilterChange = (address: string) => {
+    queryClient.invalidateQueries({ queryKey: ['getTaskOwn', taskStatus, address] });
+    startTransition(() => {
+      setSearchParams([
+        { key: 'Address', value: address },
+        { key: 'TaskStatus', value: taskStatus }
+      ]);
+    });
+  };
+
+  return {
+    state: { data, taskStatus, addressFilter },
+    functions: { onTaskStatusClick, onAddressFilterChange }
+  };
 };
