@@ -2,14 +2,11 @@
 
 import { Typography } from '@/components/typography';
 import { Button } from '@/components/ui';
-import { TaskCard } from '@/features/inspectorTasks/components/TaskCard/TaskCard';
 import {
   getTaskStatusColor,
   getTaskStatusText
 } from '@/features/inspectorTasks/helpers/getTaskStatusColor';
 import { cn } from '@/lib/utils';
-import { useGetFixationDefectTaskQuery, usePostTaskMutation } from '@/shared/api/hooks';
-import { useParams } from 'next/navigation';
 import { useDefectFixationPage } from './hooks/useDefectFixationPage';
 
 const DefectFixationPage = () => {
