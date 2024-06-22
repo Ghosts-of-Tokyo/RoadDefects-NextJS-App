@@ -21,7 +21,7 @@ const DefectFixationPage = () => {
     <div className='flex h-screen flex-col justify-between p-5'>
       <div>
         <Typography tag='h3' variant='h3' className='mb-2 text-center'>
-          Назначенные задачи
+          Подробности задачи
         </Typography>
         <div className='p-4'>
           <div className='flex justify-between'>
