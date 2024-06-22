@@ -8,14 +8,14 @@ import {
   getTaskStatusText
 } from '@/features/inspectorTasks/helpers/getTaskStatusColor';
 import { cn } from '@/lib/utils';
-import { useGetFixationDefectTaskQuery } from '@/shared/api/hooks';
+import { useGetFixationDefectTaskQuery, usePostTaskMutation } from '@/shared/api/hooks';
 import { useParams } from 'next/navigation';
+import { useDefectFixationPage } from './hooks/useDefectFixationPage';
 
 const DefectFixationPage = () => {
-  const params = useParams<{ id: string }>();
-  const { data } = useGetFixationDefectTaskQuery({ id: params.id });
+  const { state, functions } = useDefectFixationPage();
 
-  if (!data) return null;
+  if (!state.data) return null;
 
   return (
     <div className='flex h-screen flex-col justify-between p-5'>
@@ -26,21 +26,21 @@ const DefectFixationPage = () => {
         <div className='p-4'>
           <div className='flex justify-between'>
             <Typography tag='h6' variant='h7'>
-              {data?.data.id}
+              {state.data?.data.id}
             </Typography>
             <Typography
               tag='h5'
               variant='h7'
-              className={cn(getTaskStatusColor(data?.data.taskStatus))}
+              className={cn(getTaskStatusColor(state.data?.data.taskStatus))}
             >
-              {getTaskStatusText(data?.data.taskStatus!)}
+              {getTaskStatusText(state.data?.data.taskStatus!)}
             </Typography>
           </div>
           <Typography tag='p' variant='sub3' className='my-1'>
-            {data?.data.address}
+            {state.data?.data.address}
           </Typography>
           <Typography tag='p' variant='sub3'>
-            {new Date(data?.data.createdDateTime).toLocaleString()}
+            {new Date(state.data?.data.createdDateTime).toLocaleString()}
           </Typography>
 
           <div className='mt-3 space-y-2'>
@@ -50,7 +50,7 @@ const DefectFixationPage = () => {
 
             <div className='rounded-lg border-2 p-3'>
               <Typography tag='p' variant='body2'>
-                {data?.data.description}
+                {state.data?.data.description}
               </Typography>
             </div>
           </div>
@@ -61,7 +61,8 @@ const DefectFixationPage = () => {
         type='submit'
         size='lg'
         className='w-full'
-        // loading={state.isLoading}
+        loading={state.isLoading}
+        onClick={functions.onStartTaskClick}
       >
         Принять в рассмотрение
       </Button>

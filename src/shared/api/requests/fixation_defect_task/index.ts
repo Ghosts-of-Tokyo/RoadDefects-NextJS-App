@@ -10,9 +10,9 @@ export type GetFixationDefectTaskRequestConfig = RequestConfig<GetFixationDefect
 
 export const getFixationDefectTask = async ({
   config,
-  params
+  params: { id, ...params }
 }: GetFixationDefectTaskRequestConfig) =>
-  instance.get<FixationDefectTaskDTO>(`/fixation_defect_task/${params.id}`, {
+  instance.get<FixationDefectTaskDTO>(`/fixation_defect_task/${id}`, {
     ...config,
     params: { ...config?.params, ...params }
   });
