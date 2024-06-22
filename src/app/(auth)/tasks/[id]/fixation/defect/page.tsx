@@ -2,10 +2,7 @@
 
 import { Typography } from '@/components/typography';
 import { Button } from '@/components/ui';
-import {
-  getTaskStatusColor,
-  getTaskStatusText
-} from '@/features/inspectorTasks/helpers/getTaskStatusColor';
+import { getTaskStatusColor, getTaskStatusText } from '@/shared/helpers/getTaskStatusColor';
 import { cn } from '@/lib/utils';
 import { useDefectFixationPage } from './hooks/useDefectFixationPage';
 

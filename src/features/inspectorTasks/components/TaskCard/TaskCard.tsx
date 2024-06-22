@@ -1,6 +1,9 @@
 import { Typography } from '@/components/typography';
 import { FixationDefectTaskDTO, TaskDTO } from '@generated/api';
-import { getTaskStatusColor, getTaskStatusText } from '../../helpers/getTaskStatusColor';
+import {
+  getTaskStatusColor,
+  getTaskStatusText
+} from '../../../../shared/helpers/getTaskStatusColor';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { ROUTES } from '@/utils/constants/routes';
