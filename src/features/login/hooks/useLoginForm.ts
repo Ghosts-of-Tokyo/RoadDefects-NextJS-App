@@ -16,7 +16,7 @@ export const useLoginForm = () => {
     const response = await postLogin.mutateAsync({ params: data });
     localStorage.setItem('token', response.data.access);
 
-    router.push('/profile');
+    router.push('/main');
   };
 
   return {
