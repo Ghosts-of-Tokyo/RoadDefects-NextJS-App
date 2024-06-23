@@ -11,6 +11,11 @@ import {
   FormLabel,
   FormMessage,
   Input,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
   Typography
 } from '@/components/ui';
 import { useDefectFixationEditForm } from './hooks/useDefectFixationEditForm';
@@ -31,17 +36,17 @@ export const DefectFixationEditForm = ({ defect }: DefectFixationEditFormProps) 
             <div className='flex-1 space-y-3'>
               <FormField
                 control={form.control}
-                name='description'
+                name='damagedCanvasSquareMeter'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Описание</FormLabel>
+                    <FormLabel>Поврежденная площадь м.кв</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input {...field} type='number' min='0' max='1000' />
                     </FormControl>
                     <FormMessage>
-                      {form.formState?.errors?.description && (
+                      {form.formState?.errors?.damagedCanvasSquareMeter && (
                         <Typography tag='p' variant='sub3'>
-                          {form.formState.errors.description.message}
+                          {form.formState.errors.damagedCanvasSquareMeter.message}
                         </Typography>
                       )}
                     </FormMessage>
@@ -50,17 +55,33 @@ export const DefectFixationEditForm = ({ defect }: DefectFixationEditFormProps) 
               />
               <FormField
                 control={form.control}
-                name='address'
+                name='defectTypeId'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Адрес</FormLabel>
+                    <FormLabel>Тип дефекта</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Select
+                        {...field}
+                        value={field.value}
+                        onValueChange={field.onChange}
+                        disabled={defect.taskStatus === 'Completed'}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder='Дефект' />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {state.defectTypes?.map((defect) => (
+                            <SelectItem key={defect.id} value={defect.id}>
+                              {defect.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </FormControl>
                     <FormMessage>
-                      {form.formState?.errors?.address && (
+                      {form.formState?.errors?.defectTypeId && (
                         <Typography tag='p' variant='sub3'>
-                          {form.formState.errors.address.message}
+                          {form.formState.errors.defectTypeId.message}
                         </Typography>
                       )}
                     </FormMessage>

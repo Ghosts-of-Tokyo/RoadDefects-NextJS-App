@@ -4,6 +4,7 @@ import { Button, Typography } from '@/components/ui';
 import { cn } from '@/lib/utils';
 import { getTaskStatusColor, getTaskStatusText } from '@/shared/helpers/getTaskStatusColor';
 import { useDefectFixationEditPage } from './(hooks)/useDefectFixationEditPage';
+import { DefectFixationEditForm } from './(components)/DefectFixationEditForm/DefectFixationEditForm';
 
 const FixationDefectEditPage = () => {
   const { state, functions } = useDefectFixationEditPage();
@@ -19,7 +20,7 @@ const FixationDefectEditPage = () => {
         <div className='p-4'>
           <div className='flex justify-between'>
             <Typography tag='h6' variant='h7'>
-              {state.data?.data.id}
+              Фиксация дефекта
             </Typography>
             <Typography
               tag='h5'
@@ -49,6 +50,10 @@ const FixationDefectEditPage = () => {
           </div>
         </div>
       </div>
+
+      {state.data.data.defectFixation && state.data.data.taskStatus !== 'Created' && (
+        <DefectFixationEditForm defect={state.data.data} />
+      )}
 
       {!state.data.data.defectFixation && state.data.data.taskStatus === 'Processing' && (
         <Button

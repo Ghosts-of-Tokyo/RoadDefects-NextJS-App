@@ -11,6 +11,10 @@ export const getNextFlowLinkByTask = (task: TaskDTO) => {
     if (task.taskStatus === 'Processing') {
       return ROUTES.TASKS.FIXATION.DEFECT.EDIT(task.id);
     }
+
+    if (task.taskStatus === 'Completed') {
+      return ROUTES.TASKS.FIXATION.DEFECT.EDIT(task.id);
+    }
   }
 
   if (task.taskType === 'FixationWorkTask') {

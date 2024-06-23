@@ -19,9 +19,7 @@ const DefectFixationPage = () => {
         <div className='p-4'>
           <div className='flex justify-between'>
             <Typography tag='h6' variant='h7'>
-              {state.data?.data.id}
-              {/* {task.taskType === 'FixationDefectTask' && 'Фиксация дефекта'}
-              {task.taskType === 'FixationWorkTask' && 'Фиксация выполненных работ'} */}
+              Фиксация дефекта
             </Typography>
             <Typography
               tag='h5'
