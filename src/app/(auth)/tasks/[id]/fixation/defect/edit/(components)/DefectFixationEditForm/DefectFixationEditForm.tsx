@@ -69,7 +69,7 @@ export const DefectFixationEditForm = ({ defect }: DefectFixationEditFormProps) 
                         <SelectTrigger>
                           <SelectValue placeholder='Дефект' />
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent className='max-w-[calc(100vw-20px)]'>
                           {state.defectTypes?.map((defect) => (
                             <SelectItem key={defect.id} value={defect.id}>
                               {defect.name}

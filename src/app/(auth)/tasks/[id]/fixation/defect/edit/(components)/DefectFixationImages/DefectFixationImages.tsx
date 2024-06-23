@@ -82,22 +82,6 @@ export const DefectFixationImages = ({ defectTask }: DefectFixationImagesProps) 
                             </Typography>
                           </Button>
                         )}
-
-                        {/* <Button
-                          variant='ghost'
-                          onClick={() =>
-                            state.fileInputRef.current && state.fileInputRef.current.click()
-                          }
-                          type='button'
-                        >
-                          <Typography variant='body3' tag='p' className='flex-1'>
-                              Добавить фото
-                            </Typography>
-
-                          <div>
-                            <UploadIcon className='h-4 w-4 text-foreground' />
-                          </div>
-                        </Button> */}
                       </div>
                     </FormControl>
                     <div>
