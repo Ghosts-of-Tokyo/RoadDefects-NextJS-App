@@ -6,9 +6,24 @@ import { getTaskStatusColor, getTaskStatusText } from '@/shared/helpers/getTaskS
 import { useDefectFixationEditPage } from './(hooks)/useDefectFixationEditPage';
 import { DefectFixationEditForm } from './(components)/DefectFixationEditForm/DefectFixationEditForm';
 import { EditActivityDialog } from './(components)/DefectFixationImagesDialog/DefectFixationImagesDialog';
+import { useGetFixationPhotoQuery } from '@/shared/api/hooks';
+import { useParams } from 'next/navigation';
 
 const FixationDefectEditPage = () => {
+  const params = useParams<{ id: string }>();
   const { state, functions } = useDefectFixationEditPage();
+
+  //   const { data } = useGetFixationPhotoQuery({
+  //     id: params.id,
+  //     photoId: state.data?.data.defectFixation?.photos?.[0].id
+  //   });
+
+  if (state.data?.data.defectFixation?.photos) {
+    const { data } = useGetFixationPhotoQuery({
+      id: params.id,
+      photoId: state.data?.data.defectFixation?.photos?.[0].id
+    });
+  }
 
   if (!state.data) return null;
 
@@ -51,6 +66,16 @@ const FixationDefectEditPage = () => {
           </div>
         </div>
       </div>
+
+      {state.data.data.defectFixation.photos && (
+        <div>
+          <img
+            src={URL.createObjectURL(data?.data)}
+            alt='defect'
+            // className='h-96 w-full object-cover'
+          />
+        </div>
+      )}
 
       <Button onClick={functions.onEditClick} size='sm' className='rounded-full px-[10px] py-2'>
         Добавить фото

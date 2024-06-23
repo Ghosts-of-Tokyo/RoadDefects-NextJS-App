@@ -1,5 +1,6 @@
 import {
   useGetFixationDefectTaskQuery,
+  useGetFixationPhotoQuery,
   usePostFixationDefectMutation,
   usePostTaskMutation
 } from '@/shared/api/hooks';

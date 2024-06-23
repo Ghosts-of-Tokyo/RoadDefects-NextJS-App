@@ -2,6 +2,7 @@ export * from './useGetProfileQuery';
 // export * from './useGetTaskOwnInfiniteQuery';
 export * from './useGetDefectTypeQuery';
 export * from './useGetFixationDefectTaskQuery';
+export * from './useGetFixationPhotoQuery';
 export * from './useGetTaskOwnQuery';
 export * from './usePostFixationDefectMutation';
 export * from './usePostFixationPhotoMutation';

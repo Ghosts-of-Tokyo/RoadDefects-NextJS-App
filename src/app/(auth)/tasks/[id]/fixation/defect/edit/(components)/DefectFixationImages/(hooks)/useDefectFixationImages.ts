@@ -2,6 +2,8 @@ import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import type { FixationDefectTaskDTO } from '@generated/api';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
 
 import { usePostFixationPhotoMutation } from '@/shared/api/hooks';
 
@@ -13,6 +15,8 @@ interface UseDefectFixationImagesParams {
 }
 
 export const useDefectFixationImages = ({ defectTask }: UseDefectFixationImagesParams) => {
+  const queryClient = useQueryClient();
+
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const postFixationPhotoMutation = usePostFixationPhotoMutation();
@@ -33,18 +37,18 @@ export const useDefectFixationImages = ({ defectTask }: UseDefectFixationImagesP
 
   const onSubmit = defectFixationImageForm.handleSubmit(async (values) => {
     if (values.file) {
-      console.log(values.file);
-
       const formData = new FormData();
       formData.append('Photo', values.file);
 
-      console.log(formData);
-
-      const response = await postFixationPhotoMutation.mutateAsync({
+      await postFixationPhotoMutation.mutateAsync({
         params: { id: defectTask.defectFixation.id, data: formData }
       });
 
-      console.log(response.data.uploadedPhotoId);
+      toast.success('Фотография успешно добавлена');
+
+      queryClient.invalidateQueries({
+        queryKey: ['getFixationDefectTask', defectTask.defectFixation.id]
+      });
     }
   });
 
