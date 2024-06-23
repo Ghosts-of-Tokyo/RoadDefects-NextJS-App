@@ -10,4 +10,4 @@ export interface PostTaskParams {
 export type PostTaskRequestConfig = RequestConfig<PostTaskParams>;
 
 export const postTask = async ({ params, config }: PostTaskRequestConfig) =>
-  instance.put(`task/${params.id}`, params, config);
+  instance.post(`task/${params.id}`, params, config);

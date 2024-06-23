@@ -6,8 +6,13 @@ export const ROUTES = {
     ROOT: '/tasks',
     TASK: (taskId: string) => `/tasks/${taskId}`,
     FIXATION: {
-      DEFECT: (taskId: string) => `/tasks/${taskId}/fixation/defect`,
-      WORK: (taskId: string) => `/tasks/${taskId}/fixation/work`
+      DEFECT: {
+        ROOT: (taskId: string) => `/tasks/${taskId}/fixation/defect`,
+        EDIT: (taskId: string) => `/tasks/${taskId}/fixation/defect/edit`
+      },
+      WORK: {
+        ROOT: (taskId: string) => `/tasks/${taskId}/fixation/work`
+      }
     }
   },
 

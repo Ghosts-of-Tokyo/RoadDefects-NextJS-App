@@ -1,12 +1,12 @@
 'use client';
 
 import { Button, Typography } from '@/components/ui';
-import { getTaskStatusColor, getTaskStatusText } from '@/shared/helpers/getTaskStatusColor';
 import { cn } from '@/lib/utils';
-import { useDefectFixationPage } from './(hooks)/useDefectFixationPage';
+import { getTaskStatusColor, getTaskStatusText } from '@/shared/helpers/getTaskStatusColor';
+import { useDefectFixationEditPage } from './(hooks)/useDefectFixationEditPage';
 
-const DefectFixationPage = () => {
-  const { state, functions } = useDefectFixationPage();
+const FixationDefectEditPage = () => {
+  const { state, functions } = useDefectFixationEditPage();
 
   if (!state.data) return null;
 
@@ -20,8 +20,6 @@ const DefectFixationPage = () => {
           <div className='flex justify-between'>
             <Typography tag='h6' variant='h7'>
               {state.data?.data.id}
-              {/* {task.taskType === 'FixationDefectTask' && 'Фиксация дефекта'}
-              {task.taskType === 'FixationWorkTask' && 'Фиксация выполненных работ'} */}
             </Typography>
             <Typography
               tag='h5'
@@ -52,19 +50,41 @@ const DefectFixationPage = () => {
         </div>
       </div>
 
-      {state.data.data.taskStatus === 'Created' && (
+      {!state.data.data.defectFixation && state.data.data.taskStatus === 'Processing' && (
         <Button
           type='submit'
           size='lg'
-          className='w-full'
-          loading={state.isLoading.startTask}
-          onClick={functions.onStartTaskClick}
+          className='w-full bg-slate-900'
+          loading={state.isLoading.fixationDefectCreate}
+          onClick={functions.onFixationCreateClick}
         >
-          Принять в рассмотрение
+          Зафиксировать дефект
         </Button>
       )}
+
+      <div className='space-y-3'>
+        <Button
+          type='submit'
+          size='lg'
+          className='w-full bg-destructive'
+          loading={state.isLoading.fixationDefectCreate}
+          onClick={() => functions.onUpdateTaskStatusClick('CancelTask')}
+        >
+          Отложить
+        </Button>
+
+        <Button
+          type='submit'
+          size='lg'
+          className='w-full bg-green-700'
+          loading={state.isLoading.fixationDefectCreate}
+          onClick={() => functions.onUpdateTaskStatusClick('FinishTask')}
+        >
+          Завершить
+        </Button>
+      </div>
     </div>
   );
 };
 
-export default DefectFixationPage;
+export default FixationDefectEditPage;

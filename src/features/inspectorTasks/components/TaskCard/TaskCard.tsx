@@ -1,25 +1,17 @@
-import { Typography } from '@/components/typography';
-import { FixationDefectTaskDTO, TaskDTO } from '@generated/api';
-import {
-  getTaskStatusColor,
-  getTaskStatusText
-} from '../../../../shared/helpers/getTaskStatusColor';
+import { Typography } from '@/components/ui/typography';
+import { TaskDTO } from '@generated/api';
+import { getTaskStatusColor, getTaskStatusText } from '@/shared/helpers/getTaskStatusColor';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
-import { ROUTES } from '@/utils/constants/routes';
+import { getNextFlowLinkByTask } from '../../helpers/getNextFlowLinkByTask';
 
 export const TaskCard = (task: TaskDTO) => (
-  <Link
-    href={
-      task.taskType === 'FixationDefectTask'
-        ? ROUTES.TASKS.FIXATION.DEFECT(task.id)
-        : ROUTES.TASKS.FIXATION.WORK(task.id)
-    }
-  >
+  <Link href={getNextFlowLinkByTask(task)}>
     <div className='border-b-2 p-4'>
       <div className='flex justify-between'>
         <Typography tag='h6' variant='h7'>
-          {task.id}
+          {task.taskType === 'FixationDefectTask' && 'Фиксация дефекта'}
+          {task.taskType === 'FixationWorkTask' && 'Фиксация выполненных работ'}
         </Typography>
         <Typography tag='h5' variant='h7' className={cn(getTaskStatusColor(task.taskStatus))}>
           {getTaskStatusText(task.taskStatus)}
