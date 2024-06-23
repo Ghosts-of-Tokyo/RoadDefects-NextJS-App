@@ -6,4 +6,5 @@ export * from './useGetTaskOwnQuery';
 export * from './usePostFixationDefectMutation';
 export * from './usePostLoginMutation';
 export * from './usePostTaskMutation';
+export * from './usePutFixationDefectMutation';
 export * from './usePutProfileMutation';

@@ -1,7 +1,7 @@
 import * as z from 'zod';
 
 export const defectFixationEditScheme = z.object({
-  damagedCanvasSquareMeter: z.number(),
+  damagedCanvasSquareMeter: z.string().min(1, { message: 'Это обязательное поле' }),
   defectTypeId: z.string().min(1, { message: 'Это обязательное поле' })
 });
 
