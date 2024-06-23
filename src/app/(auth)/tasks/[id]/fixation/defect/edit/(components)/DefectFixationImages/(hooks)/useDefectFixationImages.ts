@@ -46,8 +46,10 @@ export const useDefectFixationImages = ({ defectTask }: UseDefectFixationImagesP
 
       toast.success('Фотография успешно добавлена');
 
+      defectFixationImageForm.setValue('file', undefined);
+
       queryClient.invalidateQueries({
-        queryKey: ['getFixationDefectTask', defectTask.defectFixation.id]
+        queryKey: ['getFixationDefectTask', defectTask.id]
       });
     }
   });

@@ -30,7 +30,7 @@ export const DefectFixationEditForm = ({ defect }: DefectFixationEditFormProps) 
 
   return (
     <Form {...form}>
-      <form onSubmit={functions.onSubmit} className='w-full'>
+      <form onSubmit={functions.onSubmit} className='my-2 w-full'>
         <fieldset disabled={state.isLoading} className='flex w-full flex-col items-end'>
           <div className='smx:flex-col mb-7 flex w-full gap-5'>
             <div className='flex-1 space-y-3'>

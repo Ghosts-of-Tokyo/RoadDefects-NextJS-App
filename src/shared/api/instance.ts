@@ -1,10 +1,12 @@
 import axios from 'axios';
 
+import { baseurl } from '@/utils/constants/baseUrl';
+
 import { errorInterceptor } from './interceptors/errorInterceptor';
 import { tokenInterceptor } from './interceptors/tokenInterceptor';
 
 export const instance = axios.create({
-  baseURL: 'http://89.111.172.231/api',
+  baseURL: `${baseurl}/api`,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json'

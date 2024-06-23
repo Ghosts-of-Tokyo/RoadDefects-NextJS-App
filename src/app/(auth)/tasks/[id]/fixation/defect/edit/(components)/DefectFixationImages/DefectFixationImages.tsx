@@ -1,6 +1,4 @@
 import {
-  Avatar,
-  AvatarImage,
   Button,
   Form,
   FormControl,
@@ -9,9 +7,11 @@ import {
   FormMessage,
   Typography
 } from '@/components/ui';
+
+import Image from 'next/image';
 import { useDefectFixationImages } from './(hooks)/useDefectFixationImages';
 import { FixationDefectTaskDTO } from '@generated/api';
-import { PlusCircledIcon, UploadIcon } from '@radix-ui/react-icons';
+import { UploadIcon } from '@radix-ui/react-icons';
 
 interface DefectFixationImagesProps {
   defectTask: FixationDefectTaskDTO;
@@ -35,9 +35,13 @@ export const DefectFixationImages = ({ defectTask }: DefectFixationImagesProps) 
                     <FormControl>
                       <div className='flex flex-col items-center justify-center gap-3'>
                         {fileFieldValue && (
-                          <Avatar className='size-[100px]'>
-                            <AvatarImage src={URL.createObjectURL(fileFieldValue)} />
-                          </Avatar>
+                          <Image
+                            className='rounded-lg'
+                            width={200}
+                            height={200}
+                            src={URL.createObjectURL(fileFieldValue)}
+                            alt='photo'
+                          />
                         )}
 
                         <input

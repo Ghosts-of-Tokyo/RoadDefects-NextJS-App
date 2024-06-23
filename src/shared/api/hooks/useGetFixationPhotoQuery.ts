@@ -8,7 +8,7 @@ export const useGetFixationPhotoQuery = (
   settings?: QuerySettings<typeof getFixationPhoto>
 ) =>
   useQuery({
-    queryKey: ['getFixationDefectTask', params.id],
+    queryKey: ['getFixationPhoto', params.id],
     queryFn: () => getFixationPhoto({ params, config: settings?.config }),
     ...settings?.options
   });

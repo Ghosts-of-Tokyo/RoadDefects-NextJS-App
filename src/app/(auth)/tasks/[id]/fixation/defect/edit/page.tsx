@@ -1,29 +1,17 @@
 'use client';
 
-import { Button, Typography } from '@/components/ui';
+import Image from 'next/image';
+import { Button, ScrollArea, ScrollBar, Typography } from '@/components/ui';
 import { cn } from '@/lib/utils';
 import { getTaskStatusColor, getTaskStatusText } from '@/shared/helpers/getTaskStatusColor';
 import { useDefectFixationEditPage } from './(hooks)/useDefectFixationEditPage';
 import { DefectFixationEditForm } from './(components)/DefectFixationEditForm/DefectFixationEditForm';
 import { EditActivityDialog } from './(components)/DefectFixationImagesDialog/DefectFixationImagesDialog';
-import { useGetFixationPhotoQuery } from '@/shared/api/hooks';
-import { useParams } from 'next/navigation';
+
+import { baseurl } from '@/utils/constants/baseUrl';
 
 const FixationDefectEditPage = () => {
-  const params = useParams<{ id: string }>();
   const { state, functions } = useDefectFixationEditPage();
-
-  //   const { data } = useGetFixationPhotoQuery({
-  //     id: params.id,
-  //     photoId: state.data?.data.defectFixation?.photos?.[0].id
-  //   });
-
-  if (state.data?.data.defectFixation?.photos) {
-    const { data } = useGetFixationPhotoQuery({
-      id: params.id,
-      photoId: state.data?.data.defectFixation?.photos?.[0].id
-    });
-  }
 
   if (!state.data) return null;
 
@@ -67,19 +55,31 @@ const FixationDefectEditPage = () => {
         </div>
       </div>
 
-      {state.data.data.defectFixation.photos && (
-        <div>
-          <img
-            src={URL.createObjectURL(data?.data)}
-            alt='defect'
-            // className='h-96 w-full object-cover'
-          />
+      {state.data.data.defectFixation && state.data.data.defectFixation.photos && (
+        <div className='my-2'>
+          <ScrollArea className='w-full space-y-1 whitespace-nowrap'>
+            <div className='flex gap-2'>
+              {state.data.data.defectFixation.photos.map((photo, index) => (
+                <div key={index} className='relative h-[200px] w-[200px]'>
+                  <Image
+                    className='rounded-lg object-cover'
+                    layout='fill'
+                    src={`${baseurl}/${photo.pathName}`}
+                    alt='photo'
+                  />
+                </div>
+              ))}
+            </div>
+            <ScrollBar orientation='horizontal' />
+          </ScrollArea>
         </div>
       )}
 
-      <Button onClick={functions.onEditClick} size='sm' className='rounded-full px-[10px] py-2'>
-        Добавить фото
-      </Button>
+      {state.data.data.defectFixation && state.data.data.taskStatus !== 'Completed' && (
+        <Button onClick={functions.onEditClick} size='sm' className='rounded-full px-[10px] py-2'>
+          Добавить фото
+        </Button>
+      )}
 
       <EditActivityDialog
         defectTask={state.data.data}
