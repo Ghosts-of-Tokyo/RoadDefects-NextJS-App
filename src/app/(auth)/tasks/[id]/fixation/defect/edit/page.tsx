@@ -16,7 +16,7 @@ const FixationDefectEditPage = () => {
   if (!state.data) return null;
 
   return (
-    <div className='flex h-screen flex-col justify-between p-5'>
+    <div className='flex flex-col justify-between p-5'>
       <div>
         <Typography tag='h3' variant='h3' className='mb-2 text-center'>
           Подробности задачи
