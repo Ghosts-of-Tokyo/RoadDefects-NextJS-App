@@ -5,14 +5,20 @@ import {
 } from '@/shared/api/hooks';
 import { ChangeTaskStatusEnum } from '@generated/api';
 import { useParams } from 'next/navigation';
+import { useState } from 'react';
 import { toast } from 'sonner';
 
 export const useDefectFixationEditPage = () => {
   const params = useParams<{ id: string }>();
 
+  const [imageDialogOpen, setImageDialogOpen] = useState(false);
+
   const { data } = useGetFixationDefectTaskQuery({ id: params.id });
   const postTaskMutation = usePostTaskMutation();
   const postFixationDefectMutation = usePostFixationDefectMutation();
+
+  const onEditClick = () => setImageDialogOpen(true);
+  const onEditCloseClick = () => setImageDialogOpen(false);
 
   const onUpdateTaskStatusClick = async (status: ChangeTaskStatusEnum) => {
     await postTaskMutation.mutateAsync({
@@ -35,8 +41,14 @@ export const useDefectFixationEditPage = () => {
       isLoading: {
         fixationDefectCreate: postFixationDefectMutation.isPending,
         updateTaskStatus: postTaskMutation.isPending
-      }
+      },
+      imageDialogOpen
     },
-    functions: { onUpdateTaskStatusClick, onFixationCreateClick }
+    functions: {
+      onUpdateTaskStatusClick,
+      onFixationCreateClick,
+      onEditClick,
+      onEditCloseClick
+    }
   };
 };

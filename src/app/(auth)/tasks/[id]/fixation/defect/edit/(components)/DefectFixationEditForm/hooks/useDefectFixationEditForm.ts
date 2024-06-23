@@ -29,7 +29,7 @@ export const useDefectFixationEditForm = ({ defect }: UseDefectFixationEditFormP
   const onSubmit = defectFixationEditForm.handleSubmit(async (values) => {
     await putFixationDefectMutation.mutateAsync({
       params: {
-        id: defect.id,
+        id: defect.defectFixation.id,
         damagedCanvasSquareMeter: Number(values.damagedCanvasSquareMeter),
         defectTypeId: values.defectTypeId
       }

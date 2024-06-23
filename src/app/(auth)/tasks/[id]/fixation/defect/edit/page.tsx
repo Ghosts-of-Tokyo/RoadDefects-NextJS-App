@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { getTaskStatusColor, getTaskStatusText } from '@/shared/helpers/getTaskStatusColor';
 import { useDefectFixationEditPage } from './(hooks)/useDefectFixationEditPage';
 import { DefectFixationEditForm } from './(components)/DefectFixationEditForm/DefectFixationEditForm';
+import { EditActivityDialog } from './(components)/DefectFixationImagesDialog/DefectFixationImagesDialog';
 
 const FixationDefectEditPage = () => {
   const { state, functions } = useDefectFixationEditPage();
@@ -50,6 +51,16 @@ const FixationDefectEditPage = () => {
           </div>
         </div>
       </div>
+
+      <Button onClick={functions.onEditClick} size='sm' className='rounded-full px-[10px] py-2'>
+        Добавить фото
+      </Button>
+
+      <EditActivityDialog
+        defectTask={state.data.data}
+        open={state.imageDialogOpen}
+        onOpenChange={functions.onEditCloseClick}
+      />
 
       {state.data.data.defectFixation && state.data.data.taskStatus !== 'Created' && (
         <DefectFixationEditForm defect={state.data.data} />

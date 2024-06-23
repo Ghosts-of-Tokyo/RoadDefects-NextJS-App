@@ -1,5 +1,6 @@
 export * from './auth/login';
 export * from './defect_type';
+export * from './fixation/id/photo';
 export * from './fixation_defect';
 export * from './fixation_defect_task';
 export * from './profile';
