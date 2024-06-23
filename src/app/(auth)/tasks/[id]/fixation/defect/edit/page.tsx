@@ -9,6 +9,7 @@ import { DefectFixationEditForm } from './(components)/DefectFixationEditForm/De
 import { EditActivityDialog } from './(components)/DefectFixationImagesDialog/DefectFixationImagesDialog';
 
 import { baseurl } from '@/utils/constants/baseUrl';
+import { Trash2Icon } from 'lucide-react';
 
 const FixationDefectEditPage = () => {
   const { state, functions } = useDefectFixationEditPage();
@@ -62,11 +63,14 @@ const FixationDefectEditPage = () => {
               {state.data.data.defectFixation.photos.map((photo, index) => (
                 <div key={index} className='relative h-[200px] w-[200px]'>
                   <Image
-                    className='rounded-lg object-cover'
+                    className='z-0 rounded-lg object-cover'
                     layout='fill'
                     src={`${baseurl}/${photo.pathName}`}
                     alt='photo'
                   />
+                  <div className='absolute right-2 top-2 z-50 rounded-full bg-slate-400'>
+                    <Trash2Icon className='m-2 stroke-white' />
+                  </div>
                 </div>
               ))}
             </div>
