@@ -3,6 +3,8 @@ export * from './defect_type';
 export * from './fixation/id/photo';
 export * from './fixation_defect';
 export * from './fixation_defect_task';
+export * from './fixation_work/id';
+export * from './fixation_work_task';
 export * from './profile';
 export * from './task/id';
 export * from './task/own';
