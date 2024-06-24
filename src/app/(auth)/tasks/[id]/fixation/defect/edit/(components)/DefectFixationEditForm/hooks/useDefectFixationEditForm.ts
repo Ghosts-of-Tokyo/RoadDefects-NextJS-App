@@ -22,7 +22,7 @@ export const useDefectFixationEditForm = ({ defect }: UseDefectFixationEditFormP
     resolver: zodResolver(defectFixationEditScheme),
     defaultValues: {
       damagedCanvasSquareMeter: defect.defectFixation.damagedCanvasSquareMeter?.toString() ?? '0',
-      defectTypeId: defect.defectFixation.defectType.id ?? ''
+      defectTypeId: (defect.defectFixation.defectType && defect.defectFixation.defectType.id) ?? ''
     }
   });
 

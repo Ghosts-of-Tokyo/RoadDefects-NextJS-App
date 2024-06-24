@@ -23,9 +23,14 @@ export const TaskCard = (task: TaskDTO) => (
       <Typography tag='p' variant='sub3'>
         {new Date(task.createdDateTime).toLocaleString()}
       </Typography>
-      {task.taskType === 'FixationDefectTask' && (
+      {task.defectStatus === 'ThereIsDefect' && (
         <Typography tag='p' variant='sub2'>
           Дефект зафиксирован
+        </Typography>
+      )}
+      {task.defectStatus === 'ThereIsNotDefect' && (
+        <Typography tag='p' variant='sub2'>
+          Дефект не обнаружен
         </Typography>
       )}
     </div>

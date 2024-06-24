@@ -53,6 +53,12 @@ const FixationDefectEditPage = () => {
               </Typography>
             </div>
           </div>
+
+          {state.data.data.defectStatus === 'ThereIsNotDefect' && (
+            <Typography tag='p' variant='sub3' className='my-1'>
+              Дефект не обнаружен
+            </Typography>
+          )}
         </div>
       </div>
 
@@ -68,9 +74,12 @@ const FixationDefectEditPage = () => {
                     src={`${baseurl}/${photo.pathName}`}
                     alt='photo'
                   />
-                  <div className='absolute right-2 top-2 z-50 rounded-full bg-slate-400'>
-                    <Trash2Icon className='m-2 stroke-white' />
-                  </div>
+                  {}
+                  {state.data?.data.taskStatus === 'Processing' && (
+                    <div className='absolute right-2 top-2 z-50 rounded-full bg-slate-400'>
+                      <Trash2Icon className='m-2 stroke-white' />
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -91,15 +100,13 @@ const FixationDefectEditPage = () => {
         onOpenChange={functions.onEditCloseClick}
       />
 
-      {state.data.data.defectFixation && state.data.data.taskStatus !== 'Created' && (
-        <DefectFixationEditForm defect={state.data.data} />
-      )}
+      {state.data.data.defectFixation && <DefectFixationEditForm defect={state.data.data} />}
 
       {!state.data.data.defectFixation && state.data.data.taskStatus === 'Processing' && (
         <Button
           type='submit'
           size='lg'
-          className='w-full bg-slate-900'
+          className='my-2 w-full bg-slate-900'
           loading={state.isLoading.fixationDefectCreate}
           onClick={functions.onFixationCreateClick}
         >
@@ -107,27 +114,29 @@ const FixationDefectEditPage = () => {
         </Button>
       )}
 
-      <div className='space-y-3'>
-        <Button
-          type='submit'
-          size='lg'
-          className='w-full bg-destructive'
-          loading={state.isLoading.fixationDefectCreate}
-          onClick={() => functions.onUpdateTaskStatusClick('CancelTask')}
-        >
-          Отложить
-        </Button>
+      {state.data.data.taskStatus === 'Processing' && (
+        <div className='space-y-3'>
+          <Button
+            type='submit'
+            size='lg'
+            className='w-full bg-destructive'
+            loading={state.isLoading.fixationDefectCreate}
+            onClick={() => functions.onUpdateTaskStatusClick('CancelTask')}
+          >
+            Отложить
+          </Button>
 
-        <Button
-          type='submit'
-          size='lg'
-          className='w-full bg-green-700'
-          loading={state.isLoading.fixationDefectCreate}
-          onClick={() => functions.onUpdateTaskStatusClick('FinishTask')}
-        >
-          Завершить
-        </Button>
-      </div>
+          <Button
+            type='submit'
+            size='lg'
+            className='w-full bg-green-700'
+            loading={state.isLoading.fixationDefectCreate}
+            onClick={() => functions.onUpdateTaskStatusClick('FinishTask')}
+          >
+            Завершить
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

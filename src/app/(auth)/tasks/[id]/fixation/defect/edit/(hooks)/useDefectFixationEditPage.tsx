@@ -4,13 +4,17 @@ import {
   usePostFixationDefectMutation,
   usePostTaskMutation
 } from '@/shared/api/hooks';
+import { ROUTES } from '@/utils/constants/routes';
 import { ChangeTaskStatusEnum } from '@generated/api';
-import { useParams } from 'next/navigation';
+import { useQueryClient } from '@tanstack/react-query';
+import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
 export const useDefectFixationEditPage = () => {
   const params = useParams<{ id: string }>();
+  const router = useRouter();
+  const queryClient = useQueryClient();
 
   const [imageDialogOpen, setImageDialogOpen] = useState(false);
 
@@ -25,13 +29,20 @@ export const useDefectFixationEditPage = () => {
     await postTaskMutation.mutateAsync({
       params: { id: params.id, ChangeTaskStatus: status }
     });
+    queryClient.invalidateQueries({ queryKey: ['getFixationDefectTask', params.id] });
+
     toast.success('Статус задачи изменен');
+
+    if (status === 'CancelTask') {
+      router.push(ROUTES.TASKS.FIXATION.DEFECT.ROOT(params.id));
+    }
   };
 
   const onFixationCreateClick = async () => {
     await postFixationDefectMutation.mutateAsync({
       params: { taskId: params.id }
     });
+    queryClient.invalidateQueries({ queryKey: ['getFixationDefectTask', params.id] });
 
     toast.success('Дефект зафиксирован');
   };

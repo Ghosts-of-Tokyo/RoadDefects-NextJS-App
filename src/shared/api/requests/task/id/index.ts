@@ -9,5 +9,11 @@ export interface PostTaskParams {
 
 export type PostTaskRequestConfig = RequestConfig<PostTaskParams>;
 
-export const postTask = async ({ params, config }: PostTaskRequestConfig) =>
-  instance.post(`task/${params.id}`, params, config);
+export const postTask = async ({
+  params: { id, ChangeTaskStatus, ...params },
+  config
+}: PostTaskRequestConfig) =>
+  instance.post(`task/${id}/?ChangeTaskStatus=${ChangeTaskStatus}`, {
+    ...config,
+    params: { ...config?.params, ...params }
+  });

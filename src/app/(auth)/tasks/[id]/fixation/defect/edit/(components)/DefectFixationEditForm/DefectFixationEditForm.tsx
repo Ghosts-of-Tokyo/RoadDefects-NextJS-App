@@ -31,7 +31,10 @@ export const DefectFixationEditForm = ({ defect }: DefectFixationEditFormProps) 
   return (
     <Form {...form}>
       <form onSubmit={functions.onSubmit} className='my-2 w-full'>
-        <fieldset disabled={state.isLoading} className='flex w-full flex-col items-end'>
+        <fieldset
+          disabled={state.isLoading || defect.taskStatus !== 'Processing'}
+          className='flex w-full flex-col items-end'
+        >
           <div className='smx:flex-col mb-7 flex w-full gap-5'>
             <div className='flex-1 space-y-3'>
               <FormField
@@ -67,7 +70,7 @@ export const DefectFixationEditForm = ({ defect }: DefectFixationEditFormProps) 
                         disabled={defect.taskStatus === 'Completed'}
                       >
                         <SelectTrigger>
-                          <SelectValue placeholder='Дефект' />
+                          <SelectValue placeholder='Выберите дефект' />
                         </SelectTrigger>
                         <SelectContent className='max-w-[calc(100vw-20px)]'>
                           {state.defectTypes?.map((defect) => (
@@ -90,9 +93,11 @@ export const DefectFixationEditForm = ({ defect }: DefectFixationEditFormProps) 
               />
             </div>
           </div>
-          <Button type='submit' size='lg' className='w-full' loading={state.isLoading}>
-            Сохранить
-          </Button>
+          {defect.taskStatus === 'Processing' && (
+            <Button type='submit' size='lg' className='w-full' loading={state.isLoading}>
+              Сохранить
+            </Button>
+          )}
         </fieldset>
       </form>
     </Form>

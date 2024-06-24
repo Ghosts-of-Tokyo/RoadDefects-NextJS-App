@@ -19,7 +19,7 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => (
   <html lang='en'>
-    <Toaster />
+    <Toaster duration={2000} />
     <body className={inter.className}>
       <Providers>{children}</Providers>
     </body>

@@ -3,10 +3,12 @@ import {
   usePostFixationDefectMutation,
   usePostTaskMutation
 } from '@/shared/api/hooks';
+import { ROUTES } from '@/utils/constants/routes';
 import { useQueryClient } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 export const useDefectFixationPage = () => {
+  const router = useRouter();
   const params = useParams<{ id: string }>();
   const queryClient = useQueryClient();
 
@@ -19,9 +21,9 @@ export const useDefectFixationPage = () => {
       params: { id: params.id, ChangeTaskStatus: 'StartTask' }
     });
 
-    if (postTaskMutation.isSuccess) {
-      queryClient.invalidateQueries({ queryKey: ['getFixationDefectTask', params.id] });
-    }
+    queryClient.invalidateQueries({ queryKey: ['getFixationDefectTask', params.id] });
+
+    router.push(ROUTES.TASKS.FIXATION.DEFECT.EDIT(params.id));
   };
 
   return {
