@@ -1,10 +1,10 @@
 'use client';
 
-import { Typography } from '@/components/typography';
+import { Typography } from '@/components/ui/typography';
 import { Input, ScrollArea, ScrollBar, Tabs, TabsList, TabsTrigger } from '@/components/ui';
 import { useInspectorTasks } from './hooks/useInspectorTasks';
 import { StatusTask } from '@generated/api';
-import { getTaskStatusText } from './helpers/getTaskStatusColor';
+import { getTaskStatusText } from '../../shared/helpers/getTaskStatusColor';
 import { TaskCard } from './components/TaskCard/TaskCard';
 
 export const InspectorTasks = () => {
