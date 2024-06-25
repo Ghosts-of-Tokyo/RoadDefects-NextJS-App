@@ -8,6 +8,7 @@ import TaskStatusButtons from '@/features/inspectorTasks/components/TaskStatusBu
 import Photos from '@/features/photos/Photos';
 import Link from 'next/link';
 import { ROUTES } from '@/utils/constants/routes';
+import { ArrowLeftIcon, ChevronLeftIcon } from 'lucide-react';
 
 const DefectFixationPage = () => {
   const { state, functions } = useDefectFixationTaskPage();
@@ -16,9 +17,12 @@ const DefectFixationPage = () => {
 
   return (
     <div className='flex h-full flex-col justify-between p-5'>
-      <div className='mb-3 flex flex-col'>
-        <DefectFixationTaskInfo data={state.data?.data} />
+      <Link href={ROUTES.TASKS.ROOT} className='absolute'>
+        <ChevronLeftIcon className='size-8 rounded-md border' />
+      </Link>
 
+      <div className='mb-3 mt-9 flex flex-col'>
+        <DefectFixationTaskInfo data={state.data?.data} />
         <Typography
           tag='p'
           variant='sub2'

@@ -7,6 +7,9 @@ import { Button, Typography } from '@/components/ui';
 import { FixationWorkEditForm } from './(components)/DefectWorkEditForm/FixationWorkEditForm';
 import { DefectFixationEditForm } from './(components)/DefectFixationEditForm/DefectFixationEditForm';
 import Photos from '@/features/photos/Photos';
+import { ChevronLeftIcon } from 'lucide-react';
+import Link from 'next/link';
+import { ROUTES } from '@/utils/constants/routes';
 
 const DefectWorkFixationPage = () => {
   const { state, functions } = useFixationWorkEditPage();
@@ -15,7 +18,11 @@ const DefectWorkFixationPage = () => {
 
   return (
     <div className='flex h-full flex-col justify-between p-5'>
-      <div className='mb-3 flex flex-col'>
+      <Link href={ROUTES.TASKS.ROOT} className='absolute'>
+        <ChevronLeftIcon className='size-8 rounded-md border' />
+      </Link>
+
+      <div className='mb-3 mt-8 flex flex-col'>
         <WorkFixationTaskInfo data={state.data?.data} />
 
         {/* <------------ fixationWork ------------> */}
