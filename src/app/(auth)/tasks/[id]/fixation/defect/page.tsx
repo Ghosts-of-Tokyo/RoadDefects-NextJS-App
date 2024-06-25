@@ -1,13 +1,14 @@
 'use client';
 
 import Image from 'next/image';
-import DefectFixationTaskInfo from './(components)/DefectFixationTaskInfo';
+import DefectFixationTaskInfo from './(components)/DefectFixationTaskInfo/DefectFixationTaskInfo';
 import { useDefectFixationTaskPage } from './(hooks)/useDefectFixationTaskPage';
 import { Trash2Icon } from 'lucide-react';
 import { EditActivityDialog } from './(components)/DefectFixationImagesDialog/DefectFixationImagesDialog';
 import { baseurl } from '@/utils/constants/baseUrl';
 import { Button, ScrollArea, ScrollBar, Typography } from '@/components/ui';
 import { DefectFixationEditForm } from './(components)/DefectFixationEditForm/DefectFixationEditForm';
+import TaskStatusButtons from '@/features/inspectorTasks/components/TaskStatusButtons/TaskStatusButtons';
 
 const DefectFixationPage = () => {
   const { state, functions } = useDefectFixationTaskPage();
@@ -81,44 +82,12 @@ const DefectFixationPage = () => {
           </Button>
         )}
       </div>
-      
-      <div>
-        {state.data.data.taskStatus === 'Created' && (
-          <Button
-            type='submit'
-            size='lg'
-            className='w-full'
-            loading={state.isLoading.updateTaskStatus}
-            onClick={() => functions.onUpdateTaskStatusClick('StartTask')}
-          >
-            Принять в рассмотрение
-          </Button>
-        )}
 
-        {state.data.data.taskStatus === 'Processing' && (
-          <div className='space-y-1'>
-            <Button
-              type='submit'
-              size='lg'
-              className='w-full bg-destructive'
-              loading={state.isLoading.updateTaskStatus}
-              onClick={() => functions.onUpdateTaskStatusClick('CancelTask')}
-            >
-              Отложить
-            </Button>
-
-            <Button
-              type='submit'
-              size='lg'
-              className='w-full bg-green-700'
-              loading={state.isLoading.updateTaskStatus}
-              onClick={() => functions.onUpdateTaskStatusClick('FinishTask')}
-            >
-              Завершить
-            </Button>
-          </div>
-        )}
-      </div>
+      <TaskStatusButtons 
+          taskStatus={state.data.data.taskStatus}
+          onUpdateTaskStatusClick={functions.onUpdateTaskStatusClick}
+          updateTaskStatus={state.isLoading.updateTaskStatus}
+        />
     </div>
   );
 };
