@@ -9,38 +9,6 @@ import { ImagesDialog } from './components/ImagesDialog/ImagesDialog';
 import { useQueryClient } from '@tanstack/react-query';
 
 interface IPhotos {
-<<<<<<< HEAD
-    taskId: string;
-    fixationId: string;
-    photos: PhotoInfoDTO[];
-    disable: boolean;
-    onAddClick: () => void;
-    onEditCloselick: () => void;
-    imageDialogOpen: boolean;
-    isFixationDefectTask: boolean;
-}
-
-const Photos : FC<IPhotos> = 
-({
-    taskId,
-    fixationId,
-    photos,
-    disable,
-    onAddClick,
-    onEditCloselick,
-    imageDialogOpen,
-    isFixationDefectTask
-}) => {
-
-  const queryClient = useQueryClient();
-
-  const onAdded = () => {
-    queryClient.invalidateQueries({
-      queryKey: [isFixationDefectTask ? 'getFixationDefectTask' : 'getFixationWorkTask', taskId]
-    });
-  }
-
-=======
   taskId: string;
   fixationId: string;
   photos: PhotoInfoDTO[];
@@ -48,6 +16,7 @@ const Photos : FC<IPhotos> =
   onAddClick: () => void;
   onEditCloselick: () => void;
   imageDialogOpen: boolean;
+  isFixationDefectTask: boolean;
 }
 
 const Photos = ({
@@ -57,9 +26,17 @@ const Photos = ({
   disable,
   onAddClick,
   onEditCloselick,
-  imageDialogOpen
+  imageDialogOpen,
+  isFixationDefectTask
 }: IPhotos) => {
->>>>>>> e2d69ed1d2e3dc3625003ff9ab22bc2edf1ebd91
+
+  const queryClient = useQueryClient();
+
+  const onAdded = () => {
+    queryClient.invalidateQueries({
+      queryKey: [isFixationDefectTask ? 'getFixationDefectTask' : 'getFixationWorkTask', taskId]
+    });
+  }
   return (
     <>
       <div>
@@ -94,22 +71,12 @@ const Photos = ({
         </Button>
       )}
 
-<<<<<<< HEAD
-        <ImagesDialog 
-            taskId={taskId}
-            fixationId={fixationId}
-            open = {imageDialogOpen}
-            onOpenChange={onEditCloselick}
-            onAdded={onAdded}
-        />
-=======
       <ImagesDialog
         taskId={taskId}
         fixationId={fixationId}
         open={imageDialogOpen}
         onOpenChange={onEditCloselick}
       />
->>>>>>> e2d69ed1d2e3dc3625003ff9ab22bc2edf1ebd91
     </>
   );
 };
