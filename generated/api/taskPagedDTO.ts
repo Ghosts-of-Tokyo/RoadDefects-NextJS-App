@@ -8,8 +8,6 @@ import type { PageInfoDTO } from './pageInfoDTO';
 import type { TaskDTO } from './taskDTO';
 
 export interface TaskPagedDTO {
-  /** @nullable */
-  models?: TaskDTO[] | null;
   pagination?: PageInfoDTO;
   /** @nullable */
   tasks?: TaskDTO[] | null;

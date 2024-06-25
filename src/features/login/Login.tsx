@@ -50,11 +50,18 @@ export const Login = () => {
             </FormItem>
           )}
         />
-        <Button disabled={state.isPending} type='submit' className='mt-3'>
-          {state.isPending && <ReloadIcon className='mr-2 h-4 w-4 animate-spin' />}
+
+        <Button
+          type='submit'
+          size='lg'
+          className='w-full'
+          loading={state.isPending}
+          disabled={state.isPending}
+        >
           Войти
         </Button>
       </form>
     </Form>
   );
 };
+

@@ -14,6 +14,7 @@ export type GetApiTaskOwnParams = {
   TaskType?: TaskTypeFilter;
   DefectStatus?: DefectStatusFilter;
   TaskStatus?: TaskStatusFilter;
+  Address?: string;
   Page?: number;
   Size?: number;
 };

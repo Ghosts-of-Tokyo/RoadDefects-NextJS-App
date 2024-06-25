@@ -10,5 +10,7 @@ export interface PhotoInfoDTO {
   /** @nullable */
   name: string | null;
   /** @nullable */
+  readonly pathName?: string | null;
+  /** @nullable */
   type: string | null;
 }

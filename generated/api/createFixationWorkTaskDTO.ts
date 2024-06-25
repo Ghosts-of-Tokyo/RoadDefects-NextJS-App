@@ -6,5 +6,6 @@
  */
 
 export interface CreateFixationWorkTaskDTO {
+  isTransfer: boolean;
   prevTaskId: string;
 }

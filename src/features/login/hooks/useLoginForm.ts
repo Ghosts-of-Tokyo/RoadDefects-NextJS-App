@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 
 import { usePostLoginMutation } from '@/shared/api/hooks';
+import { ROUTES } from '@/utils/constants/routes';
 
 import { validation } from '../constants/validation';
 
@@ -16,7 +17,7 @@ export const useLoginForm = () => {
     const response = await postLogin.mutateAsync({ params: data });
     localStorage.setItem('token', response.data.access);
 
-    router.push('/profile');
+    router.push(ROUTES.TASKS.ROOT);
   };
 
   return {

@@ -6,10 +6,6 @@
  */
 
 export interface EditFixationDefectDTO {
-  coordinatesX: number;
-  coordinatesY: number;
   damagedCanvasSquareMeter: number;
   defectTypeId: string;
-  /** @nullable */
-  exactAddress: string | null;
 }

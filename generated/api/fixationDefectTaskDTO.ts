@@ -11,7 +11,9 @@ import type { StatusTask } from './statusTask';
 
 export interface FixationDefectTaskDTO {
   /** @nullable */
-  approximateAddress: string | null;
+  address: string | null;
+  coordinateX: number;
+  coordinateY: number;
   createdDateTime: string;
   defectFixation: FixationDefectDTO;
   defectStatus: DefectStatus;
@@ -19,5 +21,6 @@ export interface FixationDefectTaskDTO {
   description: string | null;
   executor: RoadInspectorDTO;
   id: string;
+  isTransfer: boolean;
   taskStatus: StatusTask;
 }

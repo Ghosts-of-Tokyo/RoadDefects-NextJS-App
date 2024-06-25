@@ -9,6 +9,8 @@ import type { FixationDefectDTO } from './fixationDefectDTO';
 
 export interface AssignmentDTO {
   contractor: ContractorDTO;
+  createdDateTime: string;
+  deadlineDateOnly: string;
   fixationDefect: FixationDefectDTO;
   id: string;
 }

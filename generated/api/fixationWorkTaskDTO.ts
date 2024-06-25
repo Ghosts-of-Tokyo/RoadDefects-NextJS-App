@@ -12,12 +12,17 @@ import type { StatusTask } from './statusTask';
 import type { TaskDTO } from './taskDTO';
 
 export interface FixationWorkTaskDTO {
+  /** @nullable */
+  address: string | null;
+  coordinateX: number;
+  coordinateY: number;
   createdDateTime: string;
   defectFixation: FixationDefectDTO;
   defectStatus: DefectStatus;
   executor: RoadInspectorDTO;
   fixationWork: FixationWorkDTO;
   id: string;
+  isTransfer: boolean;
   prevTask: TaskDTO;
   taskStatus: StatusTask;
 }
