@@ -10,6 +10,9 @@ const config = {
   ],
   prefix: '',
   theme: {
+    zIndex: {
+      '100': '100'
+    },
     container: {
       center: true,
       padding: '2rem',

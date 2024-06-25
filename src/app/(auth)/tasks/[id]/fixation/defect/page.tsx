@@ -6,7 +6,8 @@ import { Button, Typography } from '@/components/ui';
 import { DefectFixationEditForm } from './(components)/DefectFixationEditForm/DefectFixationEditForm';
 import TaskStatusButtons from '@/features/inspectorTasks/components/TaskStatusButtons/TaskStatusButtons';
 import Photos from '@/features/photos/Photos';
-import { ContractorDialog } from './(components)/ContractorDialog/ContractorDialog';
+import Link from 'next/link';
+import { ROUTES } from '@/utils/constants/routes';
 
 const DefectFixationPage = () => {
   const { state, functions } = useDefectFixationTaskPage();
@@ -66,18 +67,13 @@ const DefectFixationPage = () => {
         updateTaskStatus={state.isLoading.updateTaskStatus}
       />
 
-      {state.data.data.taskStatus === 'Completed' && (
-        <Button type='submit' size='lg' className='w-full' onClick={functions.onContractorClick}>
-          Выбрать подрячика для выполнения работ
-        </Button>
+      {state.data.data.taskStatus === 'Completed' && state.data.data.defectFixation && (
+        <Link href={ROUTES.FIXATION_DEFECT.CONTRACTORS(state.data.data.defectFixation.id)}>
+          <Button type='submit' size='lg' className='w-full'>
+            Выбрать подрячика для выполнения работ
+          </Button>
+        </Link>
       )}
-
-      <ContractorDialog
-        open={state.contractorDialogOpen}
-        onOpenChange={functions.onContractorCloseClick}
-        fixationId={state.data.data.defectFixation.id}
-        onAdded={() => console.log('onAdded')}
-      />
     </div>
   );
 };

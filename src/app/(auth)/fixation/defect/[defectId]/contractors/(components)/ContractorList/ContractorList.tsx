@@ -1,12 +1,7 @@
 import ContractorCard from '../ContractorCard/ContractorCard';
 import { useContractorsList } from './(hooks)/useContractorsList';
 
-interface ContractorsListProps {
-  fixationId: string;
-  onAdded: () => void;
-}
-
-export const ContractorsList = ({fixationId, onAdded}: ContractorsListProps) => {
+export const ContractorsList = () => {
   const { state, functions } = useContractorsList();
 
   return (

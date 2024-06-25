@@ -6,6 +6,7 @@ export * from './useGetFixationDefectTaskQuery';
 export * from './useGetFixationPhotoQuery';
 export * from './useGetFixationWorkTaskQuery';
 export * from './useGetTaskOwnQuery';
+export * from './usePostAssignmentMutation';
 export * from './usePostFixationDefectMutation';
 export * from './usePostFixationPhotoMutation';
 export * from './usePostFixationWorkMutation';
