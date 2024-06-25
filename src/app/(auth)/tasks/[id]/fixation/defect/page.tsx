@@ -17,9 +17,11 @@ const DefectFixationPage = () => {
       <div className='flex flex-col mb-3'>
         <DefectFixationTaskInfo data={state.data?.data}/>
 
-        <Typography tag='p' variant='sub2' className='mt-4 pt-3 border-t-2 text-center text-gray-500'>
-          Зафиксированный дефект
-        </Typography>
+        {!(!state.data?.data.defectFixation && state.data?.data.taskStatus === 'Created') && (
+          <Typography tag='p' variant='sub2' className='mt-4 pt-3 border-t-2 text-center text-gray-500'>
+            Зафиксированный дефект
+          </Typography>
+        )}
 
         {state.data.data.defectStatus === 'ThereIsNotDefect' && (
           <Typography tag='p' variant='sub3' className='my-1 text-center'>

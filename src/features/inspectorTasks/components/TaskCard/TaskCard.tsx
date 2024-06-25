@@ -25,7 +25,7 @@ export const TaskCard = (task: TaskDTO) => (
         {dateFormat(new Date(task.createdDateTime))}
       </Typography>
       {task.defectStatus === 'ThereIsDefect' && (
-        <Typography tag='p' variant='sub3'>
+        <Typography tag='p' variant='sub3' style={{color: '#777'}}>
           Дефект зафиксирован
         </Typography>
       )}
