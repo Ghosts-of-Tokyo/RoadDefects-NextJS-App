@@ -15,10 +15,11 @@ import {
   interface DefectFixationImagesProps {
     taskId: string;
     fixationId: string;
+    onAdded: () => void;
   }
   
-  export const FixationImages = ({ taskId, fixationId }: DefectFixationImagesProps) => {
-    const { state, form, functions } = useFixationImages({ taskId: taskId, fixationId: fixationId });
+  export const FixationImages = ({ taskId, fixationId, onAdded }: DefectFixationImagesProps) => {
+    const { state, form, functions } = useFixationImages({ taskId: taskId, fixationId: fixationId, onAdded: onAdded});
   
     return (
       <Form {...form}>

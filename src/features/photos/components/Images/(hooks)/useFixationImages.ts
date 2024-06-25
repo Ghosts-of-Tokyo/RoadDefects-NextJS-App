@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import { usePostFixationPhotoMutation } from '@/shared/api/hooks';
@@ -12,11 +11,10 @@ import { imageScheme } from '../constants/ImageScheme';
 interface UseDefectFixationImagesParams {
   taskId: string;
   fixationId: string;
+  onAdded: () => void;
 }
 
-export const useFixationImages = ({ taskId, fixationId }: UseDefectFixationImagesParams) => {
-  const queryClient = useQueryClient();
-
+export const useFixationImages = ({ taskId, fixationId, onAdded }: UseDefectFixationImagesParams) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const postFixationPhotoMutation = usePostFixationPhotoMutation();
@@ -48,9 +46,7 @@ export const useFixationImages = ({ taskId, fixationId }: UseDefectFixationImage
 
       defectFixationImageForm.setValue('file', undefined);
 
-      // queryClient.invalidateQueries({
-      //   queryKey: ['getFixationDefectTask', taskId]
-      // });
+      onAdded();
     }
   });
 

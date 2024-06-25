@@ -16,9 +16,10 @@ import { FixationImages } from '../Images/Images';
 interface EditActivityDialogProps extends React.ComponentProps<typeof Dialog> {
   taskId: string;
   fixationId: string;
+  onAdded: () => void;
 }
 
-export const ImagesDialog = ({ taskId, fixationId, ...props }: EditActivityDialogProps) => (
+export const ImagesDialog = ({ taskId, fixationId, onAdded, ...props }: EditActivityDialogProps) => (
   <Dialog {...props}>
     <DialogContent className='flex h-screen w-full flex-col sm:rounded-none md:h-fit md:max-h-[90%] md:w-11/12 md:max-w-[713px] md:rounded-lg'>
       <DialogHeader>
@@ -28,7 +29,7 @@ export const ImagesDialog = ({ taskId, fixationId, ...props }: EditActivityDialo
           </Typography>
         </DialogTitle>
       </DialogHeader>
-      <FixationImages taskId={taskId} fixationId={fixationId} />
+      <FixationImages taskId={taskId} fixationId={fixationId} onAdded={onAdded} />
     </DialogContent>
   </Dialog>
 );

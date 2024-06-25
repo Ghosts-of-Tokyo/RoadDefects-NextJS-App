@@ -36,6 +36,7 @@ const DefectFixationPage = () => {
             onAddClick={functions.onEditClick}
             onEditCloselick={functions.onEditCloseClick}
             imageDialogOpen={state.imageDialogOpen}
+            isFixationDefectTask={true}
           />
         )}
 

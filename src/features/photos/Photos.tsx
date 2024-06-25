@@ -7,6 +7,7 @@ import { Trash2Icon } from 'lucide-react';
 import { PhotoInfoDTO } from '@generated/api';
 import { FC } from 'react';
 import { ImagesDialog } from './components/ImagesDialog/ImagesDialog';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface IPhotos {
     taskId: string;
@@ -16,6 +17,7 @@ interface IPhotos {
     onAddClick: () => void;
     onEditCloselick: () => void;
     imageDialogOpen: boolean;
+    isFixationDefectTask: boolean;
 }
 
 const Photos : FC<IPhotos> = 
@@ -27,7 +29,16 @@ const Photos : FC<IPhotos> =
     onAddClick,
     onEditCloselick,
     imageDialogOpen,
+    isFixationDefectTask
 }) => {
+
+  const queryClient = useQueryClient();
+
+  const onAdded = () => {
+    queryClient.invalidateQueries({
+      queryKey: [isFixationDefectTask ? 'getFixationDefectTask' : 'getFixationWorkTask', taskId]
+    });
+  }
 
   return (
     <>
@@ -68,6 +79,7 @@ const Photos : FC<IPhotos> =
             fixationId={fixationId}
             open = {imageDialogOpen}
             onOpenChange={onEditCloselick}
+            onAdded={onAdded}
         />
     </>
   );

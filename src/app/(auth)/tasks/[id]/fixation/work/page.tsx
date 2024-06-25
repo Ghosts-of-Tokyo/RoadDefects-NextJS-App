@@ -31,9 +31,9 @@ const DefectWorkFixationPage = () => {
             photos={state.data.data.fixationWork.photos}
             disable={state.data?.data.taskStatus !== 'Processing'}
             imageDialogOpen={state.imageDialogWorkOpen}
-
             onAddClick={functions.onEditWorkClick}
             onEditCloselick={functions.onEditCloseWorkClick}
+            isFixationDefectTask={false}
           />
         )}
 
@@ -76,6 +76,7 @@ const DefectWorkFixationPage = () => {
             onAddClick={functions.onEditClick}
             onEditCloselick={functions.onEditCloseClick}
             imageDialogOpen={state.imageDialogOpen}
+            isFixationDefectTask={false}
           />
         )}
 
