@@ -1,20 +1,20 @@
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import type { FixationDefectTaskDTO } from '@generated/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import { usePostFixationPhotoMutation } from '@/shared/api/hooks';
 
-import type { DefectFixationImageScheme } from '../constants/defectFixationImageScheme';
-import { defectFixationImageScheme } from '../constants/defectFixationImageScheme';
+import type { DefectFixationImageScheme } from '../constants/ImageScheme';
+import { imageScheme } from '../constants/ImageScheme';
 
 interface UseDefectFixationImagesParams {
-  defectTask: FixationDefectTaskDTO;
+  taskId: string;
+  fixationId: string;
 }
 
-export const useDefectFixationImages = ({ defectTask }: UseDefectFixationImagesParams) => {
+export const useFixationImages = ({ taskId, fixationId }: UseDefectFixationImagesParams) => {
   const queryClient = useQueryClient();
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -23,7 +23,7 @@ export const useDefectFixationImages = ({ defectTask }: UseDefectFixationImagesP
 
   const defectFixationImageForm = useForm<DefectFixationImageScheme>({
     mode: 'onSubmit',
-    resolver: zodResolver(defectFixationImageScheme),
+    resolver: zodResolver(imageScheme),
     defaultValues: {
       file: undefined
     }
@@ -41,16 +41,16 @@ export const useDefectFixationImages = ({ defectTask }: UseDefectFixationImagesP
       formData.append('Photo', values.file);
 
       await postFixationPhotoMutation.mutateAsync({
-        params: { id: defectTask.defectFixation.id, data: formData }
+        params: { id: fixationId, data: formData }
       });
 
       toast.success('Фотография успешно добавлена');
 
       defectFixationImageForm.setValue('file', undefined);
 
-      queryClient.invalidateQueries({
-        queryKey: ['getFixationDefectTask', defectTask.id]
-      });
+      // queryClient.invalidateQueries({
+      //   queryKey: ['getFixationDefectTask', taskId]
+      // });
     }
   });
 

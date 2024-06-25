@@ -19,7 +19,7 @@ const WorkFixationTaskInfo : FC<IWorkFixationTaskInfo> =
     <Typography tag='h3' variant='h3' className='mb-2 text-center'>
       Подробности задачи
     </Typography>
-    <div className='p-4'>
+    <div className='p-1'>
       <div className='flex justify-between'>
         <Typography tag='h6' variant='h7'>
           Фиксация выполненных работ

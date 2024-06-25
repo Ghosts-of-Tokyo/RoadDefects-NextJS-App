@@ -1,5 +1,4 @@
 import {
-  useGetFixationDefectTaskQuery,
   useGetFixationWorkTaskQuery,
   usePostFixationDefectMutation,
   usePostFixationWorkMutation,
@@ -37,7 +36,7 @@ export const useFixationWorkEditPage = () => {
     await postTaskMutation.mutateAsync({
       params: { id: params.id, ChangeTaskStatus: status }
     });
-    queryClient.invalidateQueries({ queryKey: ['getFixationDefectTask', params.id] });
+    queryClient.invalidateQueries({ queryKey: ['getFixationWorkTask', params.id] });
 
     toast.success('Статус задачи изменен');
 
@@ -46,11 +45,11 @@ export const useFixationWorkEditPage = () => {
     // }
   };
 
-  const onFixationCreateClick = async () => {
+  const onFixationDefectCreateClick = async () => {
     await postFixationDefectMutation.mutateAsync({
       params: { taskId: params.id }
     });
-    queryClient.invalidateQueries({ queryKey: ['getFixationDefectTask', params.id] });
+    queryClient.invalidateQueries({ queryKey: ['getFixationWorkTask', params.id] });
 
     toast.success('Дефект зафиксирован');
   };
@@ -69,6 +68,7 @@ export const useFixationWorkEditPage = () => {
       data,
       isLoading: {
         fixationDefectCreate: postFixationDefectMutation.isPending,
+        fixationWorkCreate: postFixationWorkMutation.isPending,
         updateTaskStatus: postTaskMutation.isPending
       },
       imageDialogOpen,
@@ -76,12 +76,14 @@ export const useFixationWorkEditPage = () => {
     },
     functions: {
       onUpdateTaskStatusClick,
-      onFixationCreateClick,
+      onFixationDefectCreateClick,
       onFixationWorkCreateClick,
-      onEditClick,
+
       onEditWorkClick,
+      onEditCloseWorkClick,
+
+      onEditClick,
       onEditCloseClick,
-      onEditCloseWorkClick
     }
   };
 };

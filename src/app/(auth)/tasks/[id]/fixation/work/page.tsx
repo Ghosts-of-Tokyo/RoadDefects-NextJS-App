@@ -1,16 +1,12 @@
 'use client';
 
-import Image from 'next/image';
 import TaskStatusButtons from '@/features/inspectorTasks/components/TaskStatusButtons/TaskStatusButtons';
 import { useFixationWorkEditPage } from './(hooks)/useFixationWorkEditPage';
 import WorkFixationTaskInfo from './(components)/WorkFixationTaskInfo/WorkFixationTaskInfo';
-import { ScrollArea } from '@radix-ui/react-scroll-area';
-import { baseurl } from '@/utils/constants/baseUrl';
-import { Trash2Icon } from 'lucide-react';
-import { Button, ScrollBar, Typography } from '@/components/ui';
-import { DefectFixationImagesDialog } from './(components)/DefectFixationImagesDialog/DefectFixationImagesDialog';
+import { Button, Typography } from '@/components/ui';
 import { FixationWorkEditForm } from './(components)/DefectWorkEditForm/FixationWorkEditForm';
 import { DefectFixationEditForm } from './(components)/DefectFixationEditForm/DefectFixationEditForm';
+import Photos from '@/features/photos/Photos';
 
 const DefectWorkFixationPage = () => {
   const { state, functions } = useFixationWorkEditPage();
@@ -18,127 +14,86 @@ const DefectWorkFixationPage = () => {
   if (!state.data) return null;
 
   return (
-    <div className='flex h-screen flex-col justify-between p-5'>
+    <div className='flex h-full flex-col justify-between p-5'>
       <div className='flex flex-col mb-3'>
         <WorkFixationTaskInfo data={state.data?.data} />
 
-        <div>
+        {/* <------------ fixationWork ------------> */}
+        
+        <Typography tag='p' variant='sub2' className='mt-4 pt-3 border-t-2 text-center text-gray-500'>
+          Зафиксированный факт выполнения работ
+        </Typography>
+
         {state.data.data.fixationWork && state.data.data.fixationWork.photos && (
-          <div className='my-2'>
-            <ScrollArea className='w-full space-y-1 whitespace-nowrap'>
-              <div className='flex gap-2'>
-                {state.data.data.fixationWork.photos.map((photo, index) => (
-                  <div key={index} className='relative h-[200px] w-[200px]'>
-                    <Image
-                      className='z-0 rounded-lg object-cover'
-                      layout='fill'
-                      src={`${baseurl}/${photo.pathName}`}
-                      alt='photo'
-                    />
-                    {}
-                    {state.data?.data.taskStatus === 'Processing' && (
-                      <div className='absolute right-2 top-2 z-50 rounded-full bg-slate-400'>
-                        <Trash2Icon className='m-2 stroke-white' />
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-              <ScrollBar orientation='horizontal' />
-            </ScrollArea>
-          </div>
+          <Photos 
+            taskId={state.data.data.id}
+            fixationId={state.data.data.fixationWork.id}
+            photos={state.data.data.fixationWork.photos}
+            disable={state.data?.data.taskStatus !== 'Processing'}
+            imageDialogOpen={state.imageDialogWorkOpen}
+
+            onAddClick={functions.onEditWorkClick}
+            onEditCloselick={functions.onEditCloseWorkClick}
+          />
+        )}
+
+        {state.data.data.fixationWork && <FixationWorkEditForm defect={state.data.data} />}
+        {state.data.data.fixationWork && (
+          <Typography tag='p' variant='sub4' className='my-1'>
+            Зафиксировано в {new Date(state.data.data.fixationWork.recordedDateTime).toLocaleString()}
+          </Typography>
+        )}
+        {!state.data.data.fixationWork && state.data?.data.taskStatus === 'Processing' &&  (
+          <Button
+            type='submit'
+            size='lg'
+            className='my-2 w-full bg-slate-900'
+            loading={state.isLoading.fixationWorkCreate}
+            onClick={functions.onFixationWorkCreateClick}
+          >
+            Созданию фиксацию выполненных работ
+          </Button>
+        )}
+
+          {/* <------------ defectFixation ------------> */}
+
+        <Typography tag='p' variant='sub2' className='mt-4 pt-3 border-t-2 text-center text-gray-500'>
+          Дефект обнаруженный в ходе проверки выполненных работ
+        </Typography>
+
+        {state.data.data.defectStatus === 'ThereIsNotDefect' && (
+          <Typography tag='p' variant='sub3' className='my-1 text-center'>
+            Дефект не обнаружен
+          </Typography>
+        )}
+
+        {state.data.data.defectFixation && state.data.data.defectFixation.photos && (
+          <Photos 
+            taskId={state.data.data.id}
+            fixationId={state.data.data.defectFixation.id}
+            photos={state.data.data.defectFixation.photos}
+            disable={state.data?.data.taskStatus !== 'Processing'}
+            onAddClick={functions.onEditClick}
+            onEditCloselick={functions.onEditCloseClick}
+            imageDialogOpen={state.imageDialogOpen}
+          />
+        )}
+
+        {state.data?.data.defectFixation && <DefectFixationEditForm defect={state.data.data} />}
+        {!state.data?.data.defectFixation && state.data?.data.taskStatus === 'Processing' && (
+          <Button
+            type='submit'
+            size='lg'
+            className='my-2 w-full bg-slate-900'
+            loading={state.isLoading.fixationDefectCreate}
+            onClick={functions.onFixationDefectCreateClick}
+          >
+            Зафиксировать дефект
+          </Button>
         )}
       </div>
-      {!state.data.data.fixationWork && (
-        <Button
-          type='submit'
-          size='lg'
-          className='my-2 w-full bg-slate-900'
-          loading={state.isLoading.fixationDefectCreate}
-          onClick={functions.onFixationCreateClick}
-        >
-          Созданию фиксацию выполненных работ
-        </Button>
-      )}
-      {state.data.data.fixationWork && (
-        <Button
-          onClick={functions.onEditWorkClick}
-          size='sm'
-          className='rounded-full px-[10px] py-2'
-        >
-          Добавить фото
-        </Button>
-      )}
-      {state.data.data.fixationWork && (
-        <DefectFixationImagesDialog
-          defectTask={state.data.data} //исправить, чтобы добавлялось к фиксации работ
-          open={state.imageDialogWorkOpen}
-          onOpenChange={functions.onEditCloseWorkClick}
-        />
-      )}
 
-      {state.data.data.fixationWork && <FixationWorkEditForm defect={state.data.data} />}
-
-      {state.data.data.fixationWork && (
-        <Typography tag='p' variant='sub4' className='my-1'>
-          Зафиксировано в {new Date(state.data.data.fixationWork.recordedDateTime).toLocaleString()}
-        </Typography>
-      )}
-
-      <Typography tag='p' variant='sub2' className='mt-4 border-t-2 text-center text-gray-700'>
-        Дефект обнаруженный в ходе проверки выполненных работ
-      </Typography>
-      {state.data?.data.defectFixation && state.data?.data.defectFixation.photos && (
-        <div className='my-2'>
-          <ScrollArea className='w-full space-y-1 whitespace-nowrap'>
-            <div className='flex gap-2'>
-              {state.data?.data.defectFixation.photos.map((photo, index) => (
-                <div key={index} className='relative h-[200px] w-[200px]'>
-                  <Image
-                    className='z-0 rounded-lg object-cover'
-                    layout='fill'
-                    src={`${baseurl}/${photo.pathName}`}
-                    alt='photo'
-                  />
-                  {}
-                  {state.data?.data.taskStatus === 'Processing' && (
-                    <div className='absolute right-2 top-2 z-50 rounded-full bg-slate-400'>
-                      <Trash2Icon className='m-2 stroke-white' />
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-            <ScrollBar orientation='horizontal' />
-          </ScrollArea>
-        </div>
-      )}
-      {state.data?.data.defectFixation && state.data?.data.taskStatus !== 'Completed' && (
-        <Button onClick={functions.onEditClick} size='sm' className='rounded-full px-[10px] py-2'>
-          Добавить фото
-        </Button>
-      )}
-      {state.data?.data.defectFixation && (
-        <DefectFixationImagesDialog
-          defectTask={state.data.data}
-          open={state.imageDialogOpen}
-          onOpenChange={functions.onEditCloseClick}
-        />
-      )}
-
-      {state.data?.data.defectFixation && <DefectFixationEditForm defect={state.data.data} />}
-      {!state.data?.data.defectFixation && state.data?.data.taskStatus === 'Processing' && (
-        <Button
-          type='submit'
-          size='lg'
-          className='my-2 w-full bg-slate-900'
-          loading={state.isLoading.fixationDefectCreate}
-          onClick={functions.onFixationCreateClick}
-        >
-          Зафиксировать дефект
-        </Button>
-      )}
-      </div>
+      {/* <------------ TaskStatusButtons ------------> */}
 
       <TaskStatusButtons 
           taskStatus={state.data.data.taskStatus}

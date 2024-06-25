@@ -3,7 +3,7 @@ import * as z from 'zod';
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
 
-export const defectFixationImageScheme = z.object({
+export const imageScheme = z.object({
   file: z
     .custom<File>((file) => file instanceof File)
     .optional()
@@ -19,4 +19,4 @@ export const defectFixationImageScheme = z.object({
     )
 });
 
-export type DefectFixationImageScheme = z.infer<typeof defectFixationImageScheme>;
+export type DefectFixationImageScheme = z.infer<typeof imageScheme>;
