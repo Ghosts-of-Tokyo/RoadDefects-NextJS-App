@@ -10,7 +10,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Input
+  Input,
+  Typography
 } from '@/components/ui';
 
 import { useLoginForm } from './hooks/useLoginForm';
@@ -24,6 +25,10 @@ export const Login = () => {
         className='flex max-w-prose flex-col gap-8'
         onSubmit={state.form.handleSubmit(functions.onSubmit)}
       >
+        <Typography tag='h1' variant='h1' className='my-1 text-center'>
+          <span>Road</span><span className='text-primary'>Wise</span>
+        </Typography>
+
         <FormField
           control={state.form.control}
           name='email'

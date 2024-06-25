@@ -7,6 +7,7 @@ import { Button, Typography } from '@/components/ui';
 import { FixationWorkEditForm } from './(components)/DefectWorkEditForm/FixationWorkEditForm';
 import { DefectFixationEditForm } from './(components)/DefectFixationEditForm/DefectFixationEditForm';
 import Photos from '@/features/photos/Photos';
+import { dateFormat } from '@/shared/helpers/dateFormat';
 
 const DefectWorkFixationPage = () => {
   const { state, functions } = useFixationWorkEditPage();
@@ -40,7 +41,7 @@ const DefectWorkFixationPage = () => {
         {state.data.data.fixationWork && <FixationWorkEditForm defect={state.data.data} />}
         {state.data.data.fixationWork && (
           <Typography tag='p' variant='sub4' className='my-1'>
-            Зафиксировано в {new Date(state.data.data.fixationWork.recordedDateTime).toLocaleString()}
+            Зафиксировано {dateFormat(new Date(state.data.data.fixationWork.recordedDateTime))}
           </Typography>
         )}
         {!state.data.data.fixationWork && state.data?.data.taskStatus === 'Processing' &&  (

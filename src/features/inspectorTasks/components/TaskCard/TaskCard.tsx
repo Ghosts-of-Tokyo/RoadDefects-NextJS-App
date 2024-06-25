@@ -4,6 +4,7 @@ import { getTaskStatusColor, getTaskStatusText } from '@/shared/helpers/getTaskS
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { getNextFlowLinkByTask } from '../../helpers/getNextFlowLinkByTask';
+import { dateFormat } from '@/shared/helpers/dateFormat';
 
 export const TaskCard = (task: TaskDTO) => (
   <Link href={getNextFlowLinkByTask(task)}>
@@ -21,7 +22,7 @@ export const TaskCard = (task: TaskDTO) => (
         {task.address}
       </Typography>
       <Typography tag='p' variant='sub3'>
-        {new Date(task.createdDateTime).toLocaleString()}
+        {dateFormat(new Date(task.createdDateTime))}
       </Typography>
       {task.defectStatus === 'ThereIsDefect' && (
         <Typography tag='p' variant='sub3'>
