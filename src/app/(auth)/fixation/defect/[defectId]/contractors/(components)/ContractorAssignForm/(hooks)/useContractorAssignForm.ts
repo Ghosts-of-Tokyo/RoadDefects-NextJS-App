@@ -36,7 +36,7 @@ export const useContractorAssignForm = ({ contractorId }: useContractorAssignFor
   return {
     form: contractorAssignForm,
     state: {
-      isLoading: false
+      isLoading: postAssignmentMutation.isPending
     },
     functions: {
       onSubmit
