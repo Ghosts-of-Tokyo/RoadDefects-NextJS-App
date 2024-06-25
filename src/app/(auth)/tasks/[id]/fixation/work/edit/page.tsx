@@ -107,9 +107,11 @@ const FixationDefectEditPage = () => {
 
       {state.data.data.fixationWork && <FixationWorkEditForm defect={state.data.data} />}
 
-      <Typography tag='p' variant='sub4' className='my-1'>
-        Зафиксировано в {new Date(state.data.data.fixationWork.recordedDateTime).toLocaleString()}
-      </Typography>
+      {state.data.data.fixationWork && (
+        <Typography tag='p' variant='sub4' className='my-1'>
+          Зафиксировано в {new Date(state.data.data.fixationWork.recordedDateTime).toLocaleString()}
+        </Typography>
+      )}
 
       <Typography tag='p' variant='sub2' className='mt-4 border-t-2 text-center text-gray-700'>
         Дефект обнаруженный в ходе проверки выполненных работ

@@ -33,6 +33,7 @@ export interface TypographyProps extends VariantProps<typeof typographyVariants>
   children: React.ReactNode;
   className?: string;
   tag?: keyof JSX.IntrinsicElements;
+  style?: React.CSSProperties;
 }
 
 export const Typography = ({
@@ -40,9 +41,10 @@ export const Typography = ({
   variant,
   className = '',
   tag: Tag = 'div',
+  style,
   ...props
 }: TypographyProps) => (
-  <Tag className={cn(typographyVariants({ variant, className }))} {...props}>
+  <Tag className={cn(typographyVariants({ variant, className }))} style={style} {...props}>
     {children}
   </Tag>
 );
