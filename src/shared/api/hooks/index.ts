@@ -1,5 +1,6 @@
 export * from './useGetProfileQuery';
 // export * from './useGetTaskOwnInfiniteQuery';
+export * from './useGetContractorsQuery';
 export * from './useGetDefectTypeQuery';
 export * from './useGetFixationDefectTaskQuery';
 export * from './useGetFixationPhotoQuery';

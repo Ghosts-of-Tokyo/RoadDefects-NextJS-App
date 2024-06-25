@@ -14,10 +14,14 @@ export const useDefectFixationTaskPage = () => {
   const queryClient = useQueryClient();
 
   const [imageDialogOpen, setImageDialogOpen] = useState(false);
+  const [contractorDialogOpen, setContractorDialogOpen] = useState(false);
 
   const { data } = useGetFixationDefectTaskQuery({ id: params.id });
   const postTaskMutation = usePostTaskMutation();
   const postFixationDefectMutation = usePostFixationDefectMutation();
+
+  const onContractorClick = () => setContractorDialogOpen(true);
+  const onContractorCloseClick = () => setContractorDialogOpen(false);
 
   const onEditClick = () => setImageDialogOpen(true);
   const onEditCloseClick = () => setImageDialogOpen(false);
@@ -48,13 +52,17 @@ export const useDefectFixationTaskPage = () => {
         fixationDefectCreate: postFixationDefectMutation.isPending,
         updateTaskStatus: postTaskMutation.isPending
       },
-      imageDialogOpen
+      imageDialogOpen,
+      contractorDialogOpen
     },
     functions: {
       onUpdateTaskStatusClick,
       onFixationCreateClick,
       onEditClick,
-      onEditCloseClick
+      onEditCloseClick,
+      onContractorClick,
+      onContractorCloseClick
     }
   };
 };
+

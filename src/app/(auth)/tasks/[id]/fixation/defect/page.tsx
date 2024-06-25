@@ -6,6 +6,7 @@ import { Button, Typography } from '@/components/ui';
 import { DefectFixationEditForm } from './(components)/DefectFixationEditForm/DefectFixationEditForm';
 import TaskStatusButtons from '@/features/inspectorTasks/components/TaskStatusButtons/TaskStatusButtons';
 import Photos from '@/features/photos/Photos';
+import { ContractorDialog } from './(components)/ContractorDialog/ContractorDialog';
 
 const DefectFixationPage = () => {
   const { state, functions } = useDefectFixationTaskPage();
@@ -14,10 +15,14 @@ const DefectFixationPage = () => {
 
   return (
     <div className='flex h-full flex-col justify-between p-5'>
-      <div className='flex flex-col mb-3'>
-        <DefectFixationTaskInfo data={state.data?.data}/>
+      <div className='mb-3 flex flex-col'>
+        <DefectFixationTaskInfo data={state.data?.data} />
 
-        <Typography tag='p' variant='sub2' className='mt-4 pt-3 border-t-2 text-center text-gray-500'>
+        <Typography
+          tag='p'
+          variant='sub2'
+          className='mt-4 border-t-2 pt-3 text-center text-gray-500'
+        >
           Зафиксированный дефект
         </Typography>
 
@@ -28,7 +33,7 @@ const DefectFixationPage = () => {
         )}
 
         {state.data.data.defectFixation && state.data.data.defectFixation.photos && (
-          <Photos 
+          <Photos
             taskId={state.data.data.id}
             fixationId={state.data.data.defectFixation.id}
             photos={state.data.data.defectFixation.photos}
@@ -55,11 +60,24 @@ const DefectFixationPage = () => {
         )}
       </div>
 
-      <TaskStatusButtons 
-          taskStatus={state.data.data.taskStatus}
-          onUpdateTaskStatusClick={functions.onUpdateTaskStatusClick}
-          updateTaskStatus={state.isLoading.updateTaskStatus}
-        />
+      <TaskStatusButtons
+        taskStatus={state.data.data.taskStatus}
+        onUpdateTaskStatusClick={functions.onUpdateTaskStatusClick}
+        updateTaskStatus={state.isLoading.updateTaskStatus}
+      />
+
+      {state.data.data.taskStatus === 'Completed' && (
+        <Button type='submit' size='lg' className='w-full' onClick={functions.onContractorClick}>
+          Выбрать подрячика для выполнения работ
+        </Button>
+      )}
+
+      <ContractorDialog
+        open={state.contractorDialogOpen}
+        onOpenChange={functions.onContractorCloseClick}
+        fixationId={state.data.data.defectFixation.id}
+        onAdded={() => console.log('onAdded')}
+      />
     </div>
   );
 };
