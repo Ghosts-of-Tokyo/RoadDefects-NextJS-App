@@ -29,14 +29,13 @@ const Photos = ({
   imageDialogOpen,
   isFixationDefectTask
 }: IPhotos) => {
-
   const queryClient = useQueryClient();
 
   const onAdded = () => {
     queryClient.invalidateQueries({
       queryKey: [isFixationDefectTask ? 'getFixationDefectTask' : 'getFixationWorkTask', taskId]
     });
-  }
+  };
   return (
     <>
       <div>
@@ -76,6 +75,7 @@ const Photos = ({
         fixationId={fixationId}
         open={imageDialogOpen}
         onOpenChange={onEditCloselick}
+        onAdded={onAdded}
       />
     </>
   );
