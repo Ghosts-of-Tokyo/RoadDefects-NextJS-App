@@ -1,0 +1,256 @@
+.arrow-centre {
+  animation: turn 1s infinite linear;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.arrow-centre:nth-child(1) {
+  animation-delay: 0.1111111111s;
+  opacity: 0.8888888889;
+}
+.arrow-centre:nth-child(1) .arrow {
+  transform: rotate(-90deg);
+  position: relative;
+  top: -12vmin;
+  left: -25vmin;
+  height: 50px;
+  width: 50px;
+  background: black;
+  clip-path: polygon(40% 0, 100% 50%, 40% 100%, 0 100%, 57% 50%, 0 0);
+}
+
+.arrow-centre {
+  animation: turn 1s infinite linear;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.arrow-centre:nth-child(2) {
+  animation-delay: 0.2222222222s;
+  opacity: 0.7777777778;
+}
+.arrow-centre:nth-child(2) .arrow {
+  transform: rotate(-90deg);
+  position: relative;
+  top: -12vmin;
+  left: -25vmin;
+  height: 50px;
+  width: 50px;
+  background: black;
+  clip-path: polygon(40% 0, 100% 50%, 40% 100%, 0 100%, 57% 50%, 0 0);
+}
+
+.arrow-centre {
+  animation: turn 1s infinite linear;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.arrow-centre:nth-child(3) {
+  animation-delay: 0.3333333333s;
+  opacity: 0.6666666667;
+}
+.arrow-centre:nth-child(3) .arrow {
+  transform: rotate(-90deg);
+  position: relative;
+  top: -12vmin;
+  left: -25vmin;
+  height: 50px;
+  width: 50px;
+  background: black;
+  clip-path: polygon(40% 0, 100% 50%, 40% 100%, 0 100%, 57% 50%, 0 0);
+}
+
+.arrow-centre {
+  animation: turn 1s infinite linear;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.arrow-centre:nth-child(4) {
+  animation-delay: 0.4444444444s;
+  opacity: 0.5555555556;
+}
+.arrow-centre:nth-child(4) .arrow {
+  transform: rotate(-90deg);
+  position: relative;
+  top: -12vmin;
+  left: -25vmin;
+  height: 50px;
+  width: 50px;
+  background: black;
+  clip-path: polygon(40% 0, 100% 50%, 40% 100%, 0 100%, 57% 50%, 0 0);
+}
+
+.arrow-centre {
+  animation: turn 1s infinite linear;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.arrow-centre:nth-child(5) {
+  animation-delay: 0.5555555556s;
+  opacity: 0.4444444444;
+}
+.arrow-centre:nth-child(5) .arrow {
+  transform: rotate(-90deg);
+  position: relative;
+  top: -12vmin;
+  left: -25vmin;
+  height: 50px;
+  width: 50px;
+  background: black;
+  clip-path: polygon(40% 0, 100% 50%, 40% 100%, 0 100%, 57% 50%, 0 0);
+}
+
+.arrow-centre {
+  animation: turn 1s infinite linear;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.arrow-centre:nth-child(6) {
+  animation-delay: 0.6666666667s;
+  opacity: 0.3333333333;
+}
+.arrow-centre:nth-child(6) .arrow {
+  transform: rotate(-90deg);
+  position: relative;
+  top: -12vmin;
+  left: -25vmin;
+  height: 50px;
+  width: 50px;
+  background: black;
+  clip-path: polygon(40% 0, 100% 50%, 40% 100%, 0 100%, 57% 50%, 0 0);
+}
+
+.arrow-centre {
+  animation: turn 1s infinite linear;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.arrow-centre:nth-child(7) {
+  animation-delay: 0.7777777778s;
+  opacity: 0.2222222222;
+}
+.arrow-centre:nth-child(7) .arrow {
+  transform: rotate(-90deg);
+  position: relative;
+  top: -12vmin;
+  left: -25vmin;
+  height: 50px;
+  width: 50px;
+  background: black;
+  clip-path: polygon(40% 0, 100% 50%, 40% 100%, 0 100%, 57% 50%, 0 0);
+}
+
+.arrow-centre {
+  animation: turn 1s infinite linear;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.arrow-centre:nth-child(8) {
+  animation-delay: 0.8888888889s;
+  opacity: 0.1111111111;
+}
+.arrow-centre:nth-child(8) .arrow {
+  transform: rotate(-90deg);
+  position: relative;
+  top: -12vmin;
+  left: -25vmin;
+  height: 50px;
+  width: 50px;
+  background: black;
+  clip-path: polygon(40% 0, 100% 50%, 40% 100%, 0 100%, 57% 50%, 0 0);
+}
+
+.arrow-centre {
+  animation: turn 1s infinite linear;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.arrow-centre:nth-child(9) {
+  animation-delay: 1s;
+  opacity: 0;
+}
+.arrow-centre:nth-child(9) .arrow {
+  transform: rotate(-90deg);
+  position: relative;
+  top: -12vmin;
+  left: -25vmin;
+  height: 50px;
+  width: 50px;
+  background: black;
+  clip-path: polygon(40% 0, 100% 50%, 40% 100%, 0 100%, 57% 50%, 0 0);
+}
+
+.arrow-centre {
+  animation: turn 1s infinite linear;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.arrow-centre:nth-child(10) {
+  animation-delay: 1.1111111111s;
+  opacity: -0.1111111111;
+}
+.arrow-centre:nth-child(10) .arrow {
+  transform: rotate(-90deg);
+  position: relative;
+  top: -12vmin;
+  left: -25vmin;
+  height: 50px;
+  width: 50px;
+  background: black;
+  clip-path: polygon(40% 0, 100% 50%, 40% 100%, 0 100%, 57% 50%, 0 0);
+}
+
+@keyframes turn {
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/*  */
+
+.loadingText {
+  /* width: 101px; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: larger;  
+}
+
+.loadingDots::after {
+  content: '...';
+  animation: dots 2s steps(3, end) infinite;
+}
+
+@keyframes dots {
+  0%, 20% {
+      content: '';
+  }
+  40% {
+      content: '.';
+  }
+  60% {
+      content: '..';
+  }
+  80%, 100% {
+      content: '...';
+  }
+}
