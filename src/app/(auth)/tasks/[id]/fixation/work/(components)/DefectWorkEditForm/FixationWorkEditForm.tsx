@@ -10,14 +10,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
   RadioGroup,
   RadioGroupItem,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
   Typography
 } from '@/components/ui';
 
@@ -26,10 +20,11 @@ import { useFixationWorkEditForm } from './hooks/useFixationWorkEditForm';
 
 interface DefectFixationEditFormProps {
   defect: FixationWorkTaskDTO;
+  onSaveAsync: () => void;
 }
 
-export const FixationWorkEditForm = ({ defect }: DefectFixationEditFormProps) => {
-  const { state, form, functions } = useFixationWorkEditForm({ defect });
+export const FixationWorkEditForm = ({ defect, onSaveAsync }: DefectFixationEditFormProps) => {
+  const { state, form, functions } = useFixationWorkEditForm({ defect, onSaveAsync });
 
   return (
     <Form {...form}>

@@ -7,15 +7,17 @@ interface ITaskStatusButtons {
   taskStatus: StatusTask;
   onUpdateTaskStatusClick: (status: ChangeTaskStatusEnum) => void;
   updateTaskStatus: boolean;
+  finishButtonDisable: boolean;
 }
 
 const TaskStatusButtons = ({
   taskStatus,
   onUpdateTaskStatusClick,
-  updateTaskStatus
+  updateTaskStatus,
+  finishButtonDisable
 }: ITaskStatusButtons) => {
   return (
-    <div>
+    <div className='pb-3'>
       {taskStatus === 'Created' && (
         <Button
           type='submit'
@@ -46,6 +48,7 @@ const TaskStatusButtons = ({
             className='w-full bg-green-700'
             loading={updateTaskStatus}
             onClick={() => onUpdateTaskStatusClick('FinishTask')}
+            disabled={finishButtonDisable}
           >
             Завершить
           </Button>

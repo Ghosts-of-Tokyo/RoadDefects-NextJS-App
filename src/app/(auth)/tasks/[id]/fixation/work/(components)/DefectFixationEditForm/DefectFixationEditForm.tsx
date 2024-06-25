@@ -24,10 +24,11 @@ import { dateFormat } from '@/shared/helpers/dateFormat';
 
 interface DefectFixationEditFormProps {
   defect: FixationWorkTaskDTO;
+  onSaveAsync: () => void;
 }
 
-export const DefectFixationEditForm = ({ defect }: DefectFixationEditFormProps) => {
-  const { state, form, functions } = useDefectFixationEditForm({ defect });
+export const DefectFixationEditForm = ({ defect, onSaveAsync }: DefectFixationEditFormProps) => {
+  const { state, form, functions } = useDefectFixationEditForm({ defect, onSaveAsync });
 
   return (
     <Form {...form}>

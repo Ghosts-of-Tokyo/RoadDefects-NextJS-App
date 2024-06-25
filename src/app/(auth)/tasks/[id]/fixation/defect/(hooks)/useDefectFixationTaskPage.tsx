@@ -40,6 +40,12 @@ export const useDefectFixationTaskPage = () => {
     toast.success('Дефект зафиксирован');
   };
 
+  const onDefectSaveAsync = async () => {
+    queryClient.invalidateQueries({ queryKey: ['getFixationDefectTask', params.id] });
+  }
+
+  const taskFinishDisable : boolean = (data?.data.defectFixation ?? false) && (!data?.data.defectFixation.defectType || !data.data.defectFixation.damagedCanvasSquareMeter);
+  
   return {
     state: {
       data,
@@ -48,13 +54,15 @@ export const useDefectFixationTaskPage = () => {
         fixationDefectCreate: postFixationDefectMutation.isPending,
         updateTaskStatus: postTaskMutation.isPending
       },
+      taskFinishDisable,
       imageDialogOpen
     },
     functions: {
       onUpdateTaskStatusClick,
       onFixationCreateClick,
       onEditClick,
-      onEditCloseClick
+      onEditCloseClick,
+      onDefectSaveAsync
     }
   };
 };

@@ -4,7 +4,6 @@ import {
   usePostFixationWorkMutation,
   usePostTaskMutation
 } from '@/shared/api/hooks';
-import { ROUTES } from '@/utils/constants/routes';
 import { ChangeTaskStatusEnum } from '@generated/api';
 import { useQueryClient } from '@tanstack/react-query';
 import { useParams, useRouter } from 'next/navigation';
@@ -13,16 +12,13 @@ import { toast } from 'sonner';
 
 export const useFixationWorkEditPage = () => {
   const params = useParams<{ id: string }>();
-  const router = useRouter();
   const queryClient = useQueryClient();
 
   const [imageDialogOpen, setImageDialogOpen] = useState(false);
   const [imageDialogWorkOpen, setImageDialogWorkOpen] = useState(false);
 
   const { data } = useGetFixationWorkTaskQuery({ id: params.id });
-  // const fixationDefectTaskQuery = useGetFixationDefectTaskQuery({ id: params.id });
 
-  // console.log(fixationDefectTaskQuery.data?.data);
   const postTaskMutation = usePostTaskMutation();
   const postFixationDefectMutation = usePostFixationDefectMutation();
   const postFixationWorkMutation = usePostFixationWorkMutation();
@@ -39,10 +35,6 @@ export const useFixationWorkEditPage = () => {
     queryClient.invalidateQueries({ queryKey: ['getFixationWorkTask', params.id] });
 
     toast.success('Статус задачи изменен');
-
-    // if (status === 'CancelTask') {
-    //   router.push(ROUTES.TASKS.FIXATION.DEFECT.ROOT(params.id));
-    // }
   };
 
   const onFixationDefectCreateClick = async () => {
@@ -63,6 +55,13 @@ export const useFixationWorkEditPage = () => {
     toast.success('Фиксация выполненных работ создана');
   };
 
+  const onSaveAsync = async () => {
+    queryClient.invalidateQueries({ queryKey: ['getFixationWorkTask', params.id] });
+  }
+
+  const taskFinishDisable : boolean = (data?.data.defectFixation ?? false) && (!data?.data.defectFixation.defectType || !data.data.defectFixation.damagedCanvasSquareMeter) ||
+                                      (!data?.data.fixationWork || (data?.data.fixationWork ?? false) && data?.data?.fixationWork.workDone === null);
+
   return {
     state: {
       data,
@@ -72,18 +71,18 @@ export const useFixationWorkEditPage = () => {
         updateTaskStatus: postTaskMutation.isPending
       },
       imageDialogOpen,
-      imageDialogWorkOpen
+      imageDialogWorkOpen,
+      taskFinishDisable
     },
     functions: {
       onUpdateTaskStatusClick,
       onFixationDefectCreateClick,
       onFixationWorkCreateClick,
-
       onEditWorkClick,
       onEditCloseWorkClick,
-
       onEditClick,
       onEditCloseClick,
+      onSaveAsync
     }
   };
 };

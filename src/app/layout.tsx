@@ -18,9 +18,9 @@ const RootLayout = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => (
-  <html lang='en' className='h-full'>
+  <html lang='en' style={{height: "100%"}}>
     <Toaster duration={2000} />
-    <body className={`${inter.className} h-full`}>
+    <body className={`${inter.className}`} style={{height: "100%"}} >
       <Providers>{children}</Providers>
     </body>
   </html>

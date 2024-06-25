@@ -10,9 +10,10 @@ import { defectFixationEditScheme } from '../constants/defectFixationEditScheme'
 
 interface UseDefectFixationEditFormParams {
   defect: FixationWorkTaskDTO;
+  onSaveAsync: () => void;
 }
 
-export const useDefectFixationEditForm = ({ defect }: UseDefectFixationEditFormParams) => {
+export const useDefectFixationEditForm = ({ defect, onSaveAsync }: UseDefectFixationEditFormParams) => {
   const { data } = useGetDefectTypeQuery();
 
   const putFixationDefectMutation = usePutFixationDefectMutation();
@@ -34,6 +35,8 @@ export const useDefectFixationEditForm = ({ defect }: UseDefectFixationEditFormP
         defectTypeId: values.defectTypeId
       }
     });
+
+    await onSaveAsync();
 
     toast.success('Фиксация дефекта успешно отредактирована');
   });
