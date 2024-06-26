@@ -1,7 +1,8 @@
+import { startTransition } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
+
 import { useGetTaskOwnQuery } from '@/shared/api/hooks';
 import { useSearchParams } from '@/utils/hooks';
-import { useQueryClient } from '@tanstack/react-query';
-import { startTransition } from 'react';
 
 export const useInspectorTasks = () => {
   const { searchParams, setSearchParams, setSearchParam } = useSearchParams();

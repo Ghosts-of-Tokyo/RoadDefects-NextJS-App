@@ -1,13 +1,14 @@
+import { useState } from 'react';
+import type { ChangeTaskStatusEnum } from '@generated/api';
+import { useQueryClient } from '@tanstack/react-query';
+import { useParams } from 'next/navigation';
+import { toast } from 'sonner';
+
 import {
   useGetFixationDefectTaskQuery,
   usePostFixationDefectMutation,
   usePostTaskMutation
 } from '@/shared/api/hooks';
-import { ChangeTaskStatusEnum } from '@generated/api';
-import { useQueryClient } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
-import { useState } from 'react';
-import { toast } from 'sonner';
 
 export const useDefectFixationTaskPage = () => {
   const params = useParams<{ id: string }>();

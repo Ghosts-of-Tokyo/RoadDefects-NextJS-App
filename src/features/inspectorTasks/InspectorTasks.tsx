@@ -1,11 +1,14 @@
 'use client';
 
-import { Typography } from '@/components/ui/typography';
-import { Input, ScrollArea, ScrollBar, Tabs, TabsList, TabsTrigger } from '@/components/ui';
-import { useInspectorTasks } from './hooks/useInspectorTasks';
 import { StatusTask } from '@generated/api';
+
+import { Input, ScrollArea, ScrollBar, Tabs, TabsList, TabsTrigger } from '@/components/ui';
+import { Typography } from '@/components/ui/typography';
+
 import { getTaskStatusText } from '../../shared/helpers/getTaskStatusColor';
+
 import { TaskCard } from './components/TaskCard/TaskCard';
+import { useInspectorTasks } from './hooks/useInspectorTasks';
 
 export const InspectorTasks = () => {
   const { state, functions } = useInspectorTasks();
@@ -47,7 +50,7 @@ export const InspectorTasks = () => {
       </ScrollArea>
 
       <div className='space-y-4'>
-        {state.data?.data.tasks?.map((task, index) => <TaskCard key={index} {...task} />)}
+        {state.data?.data.tasks?.map((task, index) => <TaskCard key={index} task={task} />)}
       </div>
     </div>
   );

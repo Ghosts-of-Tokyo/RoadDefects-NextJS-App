@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import type { FixationWorkTaskDTO } from '@generated/api';
 
 import {
   Button,
@@ -10,18 +11,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
   RadioGroup,
   RadioGroupItem,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
   Typography
 } from '@/components/ui';
 
-import { FixationWorkTaskDTO } from '@generated/api';
 import { useFixationWorkEditForm } from './hooks/useFixationWorkEditForm';
 
 interface DefectFixationEditFormProps {

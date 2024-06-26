@@ -1,7 +1,5 @@
 'use client';
 
-import { ReloadIcon } from '@radix-ui/react-icons';
-
 import {
   Button,
   Form,
@@ -64,4 +62,3 @@ export const Login = () => {
     </Form>
   );
 };
-
