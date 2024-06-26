@@ -30,13 +30,15 @@ const DefectWorkFixationPage = () => {
 
         {/* <------------ fixationWork ------------> */}
 
-        <Typography
-          tag='p'
-          variant='sub2'
-          className='mt-4 border-t-2 pt-3 text-center text-gray-500'
-        >
-          Зафиксированный факт выполнения работ
-        </Typography>
+        {!(!state.data?.data.fixationWork && state.data?.data.taskStatus === 'Created') && (
+          <Typography 
+            tag='p' 
+            variant='sub2' 
+            className='mt-4 pt-3 border-t-2 text-center text-gray-500'
+            >
+            Зафиксированный факт выполнения работ
+          </Typography>
+        )}
 
         {state.data.data.fixationWork && state.data.data.fixationWork.photos && (
           <Photos
@@ -73,13 +75,15 @@ const DefectWorkFixationPage = () => {
 
         {/* <------------ defectFixation ------------> */}
 
-        <Typography
-          tag='p'
-          variant='sub2'
-          className='mt-4 border-t-2 pt-3 text-center text-gray-500'
-        >
-          Дефект обнаруженный в ходе проверки выполненных работ
-        </Typography>
+        {!(!state.data?.data.defectFixation && state.data?.data.taskStatus === 'Created') && (
+          <Typography 
+            tag='p' 
+            variant='sub2' 
+            className='mt-4 pt-3 border-t-2 text-center text-gray-500'
+            >
+            Дефект обнаруженный в ходе проверки выполненных работ
+          </Typography>
+        )}
 
         {state.data.data.defectStatus === 'ThereIsNotDefect' && (
           <Typography tag='p' variant='sub3' className='my-1 text-center'>
