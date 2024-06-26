@@ -10,9 +10,10 @@ import { workFixationEditScheme } from '../constants/workFixationEditScheme';
 
 interface UseDefectWorkEditFormParams {
   defect: FixationWorkTaskDTO;
+  onSaveAsync: () => void;
 }
 
-export const useFixationWorkEditForm = ({ defect }: UseDefectWorkEditFormParams) => {
+export const useFixationWorkEditForm = ({ defect, onSaveAsync }: UseDefectWorkEditFormParams) => {
   const putFixationWorkMutation = usePutFixationWorkMutation();
 
   const workFixationEditForm = useForm<WorkFixationEditScheme>({
@@ -30,6 +31,8 @@ export const useFixationWorkEditForm = ({ defect }: UseDefectWorkEditFormParams)
         workDone: values.workDone === 'true'
       }
     });
+
+    await onSaveAsync();
 
     toast.success('Фиксация выполненных работ успешно отредактирована');
   });

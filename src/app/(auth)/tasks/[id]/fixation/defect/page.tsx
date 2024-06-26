@@ -52,7 +52,7 @@ const DefectFixationPage = () => {
           />
         )}
 
-        {state.data.data.defectFixation && <DefectFixationEditForm defect={state.data.data} />}
+        {state.data.data.defectFixation && <DefectFixationEditForm defect={state.data.data} onSaveAsync={functions.onDefectSaveAsync} />}
 
         {!state.data.data.defectFixation && state.data.data.taskStatus === 'Processing' && (
           <Button
@@ -71,6 +71,7 @@ const DefectFixationPage = () => {
         taskStatus={state.data.data.taskStatus}
         onUpdateTaskStatusClick={functions.onUpdateTaskStatusClick}
         updateTaskStatus={state.isLoading.updateTaskStatus}
+        finishButtonDisable={state.taskFinishDisable}
       />
 
       {state.data.data.taskStatus === 'Completed' && state.data.data.defectFixation && (

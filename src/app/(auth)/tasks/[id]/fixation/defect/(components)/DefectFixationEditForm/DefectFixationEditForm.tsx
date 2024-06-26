@@ -24,10 +24,11 @@ import { useDefectFixationEditForm } from './hooks/useDefectFixationEditForm';
 
 interface DefectFixationEditFormProps {
   defect: FixationDefectTaskDTO;
+  onSaveAsync: () => void;
 }
 
-export const DefectFixationEditForm = ({ defect }: DefectFixationEditFormProps) => {
-  const { state, form, functions } = useDefectFixationEditForm({ defect });
+export const DefectFixationEditForm = ({ defect, onSaveAsync }: DefectFixationEditFormProps) => {
+  const { state, form, functions } = useDefectFixationEditForm({ defect, onSaveAsync});
 
   return (
     <Form {...form}>
