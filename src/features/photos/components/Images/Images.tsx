@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-
 import { UploadIcon } from '@radix-ui/react-icons';
 import Image from 'next/image';
 
@@ -59,6 +56,7 @@ export const FixationImages = ({ taskId, fixationId, onAdded }: DefectFixationIm
                           className='hidden'
                           accept='image/*'
                           ref={state.fileInputRef}
+                          id='file-upload'
                         />
 
                         {!form.getValues('file') && (
@@ -67,6 +65,16 @@ export const FixationImages = ({ taskId, fixationId, onAdded }: DefectFixationIm
                             onClick={() =>
                               state.fileInputRef.current && state.fileInputRef.current.click()
                             }
+                            role='button'
+                            tabIndex={0}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter' || e.key === ' ') {
+                                if (state.fileInputRef.current) {
+                                  state.fileInputRef.current.click();
+                                }
+                              }
+                            }}
+                            aria-labelledby='file-upload'
                           >
                             <div className='relative flex h-full w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed hover:bg-secondary/20'>
                               <div className='rounded-full bg-secondary p-2'>

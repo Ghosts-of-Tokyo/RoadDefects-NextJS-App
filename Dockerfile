@@ -12,3 +12,4 @@ EXPOSE 3000
 CMD ["npm", "run", "start"]
 
 #docker build -t road-defects .
+#docker run -p 3000:3000 road-defects

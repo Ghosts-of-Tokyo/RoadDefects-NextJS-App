@@ -1,8 +1,5 @@
 'use client';
 
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-
 import type { ContractorDTO } from '@generated/api';
 
 import { Typography } from '@/components/ui';
@@ -23,7 +20,16 @@ const ContractorCard = ({ contractor }: ContractorCardProps) => {
       <Typography tag='h5' variant='h5' className='mb-2'>
         {contractor.organizationName}
       </Typography>
-      <div onClick={functions.onContractorClick}>
+      <div
+        role='button'
+        tabIndex={0}
+        onClick={functions.onContractorClick}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            functions.onContractorClick();
+          }
+        }}
+      >
         <Typography tag='p' variant='sub3' className='my-1'>
           {contractor.email}
         </Typography>

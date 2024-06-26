@@ -3,7 +3,7 @@ import ContractorCard from '../ContractorCard/ContractorCard';
 import { useContractorsList } from './(hooks)/useContractorsList';
 
 export const ContractorsList = () => {
-  const { state, functions } = useContractorsList();
+  const { state } = useContractorsList();
 
   return (
     <div>
