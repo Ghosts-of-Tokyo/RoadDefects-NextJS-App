@@ -56,7 +56,7 @@ const DefectWorkFixationPage = () => {
 
         {state.data.data.fixationWork && (
           <>
-            <FixationWorkEditForm defect={state.data.data} />
+            <FixationWorkEditForm defect={state.data.data} onSaveAsync={functions.onSaveAsync} />
             <Typography tag='p' variant='sub4' className='my-1'>
               Зафиксировано {dateFormat(new Date(state.data.data.fixationWork.recordedDateTime))}
             </Typography>
@@ -105,7 +105,7 @@ const DefectWorkFixationPage = () => {
           />
         )}
 
-        {state.data?.data.defectFixation && <DefectFixationEditForm defect={state.data.data} />}
+        {state.data?.data.defectFixation && <DefectFixationEditForm defect={state.data.data} onSaveAsync={functions.onSaveAsync} />}
         {!state.data?.data.defectFixation && state.data?.data.taskStatus === 'Processing' && (
           <Button
             type='submit'
@@ -125,6 +125,7 @@ const DefectWorkFixationPage = () => {
         taskStatus={state.data.data.taskStatus}
         onUpdateTaskStatusClick={functions.onUpdateTaskStatusClick}
         updateTaskStatus={state.isLoading.updateTaskStatus}
+        finishButtonDisable={state.taskFinishDisable}
       />
 
       {state.data.data.taskStatus === 'Completed' && state.data.data.defectFixation && !state.data.data.defectFixation.contractor && (

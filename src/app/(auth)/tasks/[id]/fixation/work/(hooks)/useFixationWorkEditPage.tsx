@@ -63,6 +63,13 @@ export const useFixationWorkEditPage = () => {
     toast.success('Фиксация выполненных работ создана');
   };
 
+  const onSaveAsync = async () => {
+    queryClient.invalidateQueries({ queryKey: ['getFixationWorkTask', params.id] });
+  }
+
+  const taskFinishDisable : boolean = (data?.data.defectFixation ?? false) && (!data?.data.defectFixation.defectType || !data.data.defectFixation.damagedCanvasSquareMeter) ||
+                                      (!data?.data.fixationWork || (data?.data.fixationWork ?? false) && data?.data?.fixationWork.workDone === null);
+
   return {
     state: {
       data,
@@ -72,7 +79,8 @@ export const useFixationWorkEditPage = () => {
         updateTaskStatus: postTaskMutation.isPending
       },
       imageDialogOpen,
-      imageDialogWorkOpen
+      imageDialogWorkOpen,
+      taskFinishDisable
     },
     functions: {
       onUpdateTaskStatusClick,
@@ -83,7 +91,8 @@ export const useFixationWorkEditPage = () => {
       onEditCloseWorkClick,
 
       onEditClick,
-      onEditCloseClick
+      onEditCloseClick,
+      onSaveAsync
     }
   };
 };
