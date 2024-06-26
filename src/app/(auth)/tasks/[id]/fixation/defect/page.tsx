@@ -11,6 +11,7 @@ import { ROUTES } from '@/utils/constants/routes';
 import { DefectFixationEditForm } from './(components)/DefectFixationEditForm/DefectFixationEditForm';
 import DefectFixationTaskInfo from './(components)/DefectFixationTaskInfo/DefectFixationTaskInfo';
 import { useDefectFixationTaskPage } from './(hooks)/useDefectFixationTaskPage';
+import ContractorCard from '@/app/(auth)/fixation/defect/[defectId]/contractors/(components)/ContractorCard/ContractorCard';
 
 const DefectFixationPage = () => {
   const { state, functions } = useDefectFixationTaskPage();
@@ -73,12 +74,25 @@ const DefectFixationPage = () => {
         updateTaskStatus={state.isLoading.updateTaskStatus}
       />
 
-      {state.data.data.taskStatus === 'Completed' && state.data.data.defectFixation && (
+      {state.data.data.taskStatus === 'Completed' && state.data.data.defectFixation && !state.data.data.defectFixation.contractor && (
         <Link href={ROUTES.FIXATION_DEFECT.CONTRACTORS(state.data.data.defectFixation.id)}>
           <Button type='submit' size='lg' className='w-full'>
             Выбрать подрячика для выполнения работ
           </Button>
         </Link>
+      )}
+
+      {state.data.data.taskStatus === 'Completed' && state.data.data.defectFixation && state.data.data.defectFixation.contractor && (
+        <>
+          <Typography
+            tag='p'
+            variant='sub2'
+            className='text-center text-gray-500'
+          >
+            Подрядчик, назначенный на устранение дефекта
+          </Typography>
+          <ContractorCard contractor={state.data.data.defectFixation.contractor} />
+        </>        
       )}
     </div>
   );
