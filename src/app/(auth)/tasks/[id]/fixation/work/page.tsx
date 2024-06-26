@@ -12,6 +12,7 @@ import { DefectFixationEditForm } from './(components)/DefectFixationEditForm/De
 import { FixationWorkEditForm } from './(components)/DefectWorkEditForm/FixationWorkEditForm';
 import WorkFixationTaskInfo from './(components)/WorkFixationTaskInfo/WorkFixationTaskInfo';
 import { useFixationWorkEditPage } from './(hooks)/useFixationWorkEditPage';
+import { dateFormat } from '@/shared/helpers/dateFormate';
 
 const DefectWorkFixationPage = () => {
   const { state, functions } = useFixationWorkEditPage();
@@ -54,8 +55,7 @@ const DefectWorkFixationPage = () => {
           <>
             <FixationWorkEditForm defect={state.data.data} />
             <Typography tag='p' variant='sub4' className='my-1'>
-              Зафиксировано в{' '}
-              {new Date(state.data.data.fixationWork.recordedDateTime).toLocaleString()}
+              Зафиксировано {dateFormat(new Date(state.data.data.fixationWork.recordedDateTime))}
             </Typography>
           </>
         )}
