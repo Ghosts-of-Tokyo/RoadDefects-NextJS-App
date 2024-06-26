@@ -1,15 +1,17 @@
 'use client';
 
-import { ContractorsList } from './(components)/ContractorList/ContractorList';
-import { Typography } from '@/components/ui';
-import { ROUTES } from '@/utils/constants/routes';
 import { ChevronLeftIcon } from 'lucide-react';
 import Link from 'next/link';
+
+import { Typography } from '@/components/ui';
+import { ROUTES } from '@/utils/constants/routes';
+
+import { ContractorsList } from './(components)/ContractorList/ContractorList';
 // import { useParams } from 'next/navigation';
 
-export const FixationDefectContractorsPage = () => {
+const FixationDefectContractorsPage = () => {
   // const params = useParams<{ defectId: string }>();
-  //fix back page
+  // fix back page
   return (
     <div className='p-5'>
       <Link href={ROUTES.TASKS.ROOT} className='absolute'>

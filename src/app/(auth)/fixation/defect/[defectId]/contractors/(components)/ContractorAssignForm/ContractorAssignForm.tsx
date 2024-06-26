@@ -11,12 +11,6 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
   Typography
 } from '@/components/ui';
 

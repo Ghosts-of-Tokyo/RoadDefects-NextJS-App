@@ -1,14 +1,16 @@
 'use client';
 
-import DefectFixationTaskInfo from './(components)/DefectFixationTaskInfo/DefectFixationTaskInfo';
-import { useDefectFixationTaskPage } from './(hooks)/useDefectFixationTaskPage';
+import { ChevronLeftIcon } from 'lucide-react';
+import Link from 'next/link';
+
 import { Button, Typography } from '@/components/ui';
-import { DefectFixationEditForm } from './(components)/DefectFixationEditForm/DefectFixationEditForm';
 import TaskStatusButtons from '@/features/inspectorTasks/components/TaskStatusButtons/TaskStatusButtons';
 import Photos from '@/features/photos/Photos';
-import Link from 'next/link';
 import { ROUTES } from '@/utils/constants/routes';
-import { ArrowLeftIcon, ChevronLeftIcon } from 'lucide-react';
+
+import { DefectFixationEditForm } from './(components)/DefectFixationEditForm/DefectFixationEditForm';
+import DefectFixationTaskInfo from './(components)/DefectFixationTaskInfo/DefectFixationTaskInfo';
+import { useDefectFixationTaskPage } from './(hooks)/useDefectFixationTaskPage';
 
 const DefectFixationPage = () => {
   const { state, functions } = useDefectFixationTaskPage();
@@ -46,7 +48,7 @@ const DefectFixationPage = () => {
             onAddClick={functions.onEditClick}
             onEditCloselick={functions.onEditCloseClick}
             imageDialogOpen={state.imageDialogOpen}
-            isFixationDefectTask={true}
+            isFixationDefectTask
           />
         )}
 

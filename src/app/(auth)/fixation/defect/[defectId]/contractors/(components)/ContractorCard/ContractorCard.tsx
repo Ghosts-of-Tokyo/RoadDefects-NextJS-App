@@ -1,10 +1,12 @@
 'use client';
 
+import type { ContractorDTO } from '@generated/api';
+
 import { Typography } from '@/components/ui';
 
-import { ContractorDTO } from '@generated/api';
-import { useContractorCard } from './(hooks)/useContractorCard';
 import { ContractorDialog } from '../ContractorDialog/ContractorDialog';
+
+import { useContractorCard } from './(hooks)/useContractorCard';
 
 interface ContractorCardProps {
   contractor: ContractorDTO;
@@ -18,7 +20,16 @@ const ContractorCard = ({ contractor }: ContractorCardProps) => {
       <Typography tag='h5' variant='h5' className='mb-2'>
         {contractor.organizationName}
       </Typography>
-      <div onClick={functions.onContractorClick}>
+      <div
+        role='button'
+        tabIndex={0}
+        onClick={functions.onContractorClick}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            functions.onContractorClick();
+          }
+        }}
+      >
         <Typography tag='p' variant='sub3' className='my-1'>
           {contractor.email}
         </Typography>

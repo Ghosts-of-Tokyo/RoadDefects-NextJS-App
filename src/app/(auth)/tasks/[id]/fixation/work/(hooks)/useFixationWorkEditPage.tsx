@@ -1,19 +1,19 @@
+import { useState } from 'react';
+import type { ChangeTaskStatusEnum } from '@generated/api';
+import { useQueryClient } from '@tanstack/react-query';
+import { useParams } from 'next/navigation';
+import { toast } from 'sonner';
+
 import {
   useGetFixationWorkTaskQuery,
   usePostFixationDefectMutation,
   usePostFixationWorkMutation,
   usePostTaskMutation
 } from '@/shared/api/hooks';
-import { ROUTES } from '@/utils/constants/routes';
-import { ChangeTaskStatusEnum } from '@generated/api';
-import { useQueryClient } from '@tanstack/react-query';
-import { useParams, useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { toast } from 'sonner';
 
 export const useFixationWorkEditPage = () => {
   const params = useParams<{ id: string }>();
-  const router = useRouter();
+
   const queryClient = useQueryClient();
 
   const [imageDialogOpen, setImageDialogOpen] = useState(false);
@@ -83,7 +83,7 @@ export const useFixationWorkEditPage = () => {
       onEditCloseWorkClick,
 
       onEditClick,
-      onEditCloseClick,
+      onEditCloseClick
     }
   };
 };

@@ -24,7 +24,6 @@ export const useFixationWorkEditForm = ({ defect }: UseDefectWorkEditFormParams)
   });
 
   const onSubmit = workFixationEditForm.handleSubmit(async (values) => {
-    console.log(values);
     await putFixationWorkMutation.mutateAsync({
       params: {
         id: defect.fixationWork.id,
