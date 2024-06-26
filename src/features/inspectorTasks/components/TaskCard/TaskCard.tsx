@@ -7,7 +7,11 @@ import { getTaskStatusColor, getTaskStatusText } from '@/shared/helpers/getTaskS
 
 import { getNextFlowLinkByTask } from '../../helpers/getNextFlowLinkByTask';
 
-export const TaskCard = (task: TaskDTO) => (
+interface TaskCardProps {
+  task: TaskDTO;
+}
+
+export const TaskCard = ({ task }: TaskCardProps) => (
   <Link href={getNextFlowLinkByTask(task)}>
     <div className='border-b-2 p-4'>
       <div className='flex justify-between'>

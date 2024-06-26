@@ -50,7 +50,7 @@ export const InspectorTasks = () => {
       </ScrollArea>
 
       <div className='space-y-4'>
-        {state.data?.data.tasks?.map((task, index) => <TaskCard key={index} {...task} />)}
+        {state.data?.data.tasks?.map((task, index) => <TaskCard key={index} task={task} />)}
       </div>
     </div>
   );

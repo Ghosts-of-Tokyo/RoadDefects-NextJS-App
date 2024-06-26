@@ -1,7 +1,6 @@
 'use client';
 
 import type { FixationDefectTaskDTO } from '@generated/api';
-import { StatusTask } from '@generated/api';
 
 import { Typography } from '@/components/ui/typography';
 import { cn } from '@/lib/utils';

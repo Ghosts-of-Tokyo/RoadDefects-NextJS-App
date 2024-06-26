@@ -7,11 +7,11 @@ import { usePostAssignmentMutation } from '@/shared/api/hooks';
 import type { ContractorAssignSchema } from '../(constants)/ContractorAssignScheme';
 import { contractorAssignSchema } from '../(constants)/ContractorAssignScheme';
 
-interface useContractorAssignFormParams {
+interface UseContractorAssignFormParams {
   contractorId: string;
 }
 
-export const useContractorAssignForm = ({ contractorId }: useContractorAssignFormParams) => {
+export const useContractorAssignForm = ({ contractorId }: UseContractorAssignFormParams) => {
   const params = useParams<{ defectId: string }>();
 
   const contractorAssignForm = useForm<ContractorAssignSchema>({

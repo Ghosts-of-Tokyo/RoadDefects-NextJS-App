@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { ChangeTaskStatusEnum } from '@generated/api';
 import { useQueryClient } from '@tanstack/react-query';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { toast } from 'sonner';
 
 import {

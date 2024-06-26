@@ -1,5 +1,8 @@
 'use client';
 
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+
 import type { ContractorDTO } from '@generated/api';
 
 import { Typography } from '@/components/ui';
