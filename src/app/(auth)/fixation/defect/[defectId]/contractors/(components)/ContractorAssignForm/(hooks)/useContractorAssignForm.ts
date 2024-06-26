@@ -28,7 +28,7 @@ export const useContractorAssignForm = ({ contractorId }: useContractorAssignFor
       params: {
         contractorId,
         fixationDefectId: params.defectId,
-        deadlineDateOnly: deadlineDate.toISOString()
+        deadlineDateOnly: deadlineDate.toISOString().split('T')[0]
       }
     });
   });
