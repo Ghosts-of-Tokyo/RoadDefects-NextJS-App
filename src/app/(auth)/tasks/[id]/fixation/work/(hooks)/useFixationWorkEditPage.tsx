@@ -64,7 +64,7 @@ export const useFixationWorkEditPage = () => {
   };
 
   const onSaveAsync = async () => {
-    queryClient.invalidateQueries({ queryKey: ['getFixationWorkTask', params.id] });
+    await queryClient.invalidateQueries({ queryKey: ['getFixationWorkTask', params.id] });
   };
 
   const taskFinishDisable: boolean =

@@ -3,10 +3,10 @@ import Link from 'next/link';
 
 import { Typography } from '@/components/ui/typography';
 import { cn } from '@/lib/utils';
+import { dateFormat } from '@/shared/helpers/dateFormate';
 import { getTaskStatusColor, getTaskStatusText } from '@/shared/helpers/getTaskStatusColor';
 
 import { getNextFlowLinkByTask } from '../../helpers/getNextFlowLinkByTask';
-import { dateFormat } from '@/shared/helpers/dateFormate';
 
 interface TaskCardProps {
   task: TaskDTO;
@@ -31,7 +31,7 @@ export const TaskCard = ({ task }: TaskCardProps) => (
         {dateFormat(new Date(task.createdDateTime))}
       </Typography>
       {task.defectStatus === 'ThereIsDefect' && (
-        <Typography tag='p' variant='sub3' style={{color: '#777'}}>
+        <Typography tag='p' variant='sub3' style={{ color: '#777' }}>
           Дефект зафиксирован
         </Typography>
       )}

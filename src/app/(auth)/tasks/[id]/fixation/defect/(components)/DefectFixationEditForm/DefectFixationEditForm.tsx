@@ -19,9 +19,9 @@ import {
   SelectValue,
   Typography
 } from '@/components/ui';
+import { dateFormat } from '@/shared/helpers/dateFormate';
 
 import { useDefectFixationEditForm } from './hooks/useDefectFixationEditForm';
-import { dateFormat } from '@/shared/helpers/dateFormate';
 
 interface DefectFixationEditFormProps {
   defect: FixationDefectTaskDTO;
@@ -29,7 +29,7 @@ interface DefectFixationEditFormProps {
 }
 
 export const DefectFixationEditForm = ({ defect, onSaveAsync }: DefectFixationEditFormProps) => {
-  const { state, form, functions } = useDefectFixationEditForm({ defect, onSaveAsync});
+  const { state, form, functions } = useDefectFixationEditForm({ defect, onSaveAsync });
 
   return (
     <Form {...form}>

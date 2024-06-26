@@ -4,8 +4,8 @@ import type { FixationDefectTaskDTO } from '@generated/api';
 
 import { Typography } from '@/components/ui/typography';
 import { cn } from '@/lib/utils';
-import { getTaskStatusColor, getTaskStatusText } from '@/shared/helpers/getTaskStatusColor';
 import { dateFormat } from '@/shared/helpers/dateFormate';
+import { getTaskStatusColor, getTaskStatusText } from '@/shared/helpers/getTaskStatusColor';
 
 interface IDefectFixationTaskInfo {
   data: FixationDefectTaskDTO;

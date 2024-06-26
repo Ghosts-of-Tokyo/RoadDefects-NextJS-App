@@ -24,7 +24,8 @@ export const Login = () => {
         onSubmit={state.form.handleSubmit(functions.onSubmit)}
       >
         <Typography tag='h1' variant='h1' className='my-1 text-center'>
-          <span>Road</span><span className='text-primary'>Wise</span>
+          <span>Road</span>
+          <span className='text-primary'>Wise</span>
         </Typography>
 
         <FormField

@@ -3,6 +3,7 @@
 import { ChevronLeftIcon } from 'lucide-react';
 import Link from 'next/link';
 
+import ContractorCard from '@/app/(auth)/fixation/defect/[defectId]/contractors/(components)/ContractorCard/ContractorCard';
 import { Button, Typography } from '@/components/ui';
 import TaskStatusButtons from '@/features/inspectorTasks/components/TaskStatusButtons/TaskStatusButtons';
 import Photos from '@/features/photos/Photos';
@@ -11,7 +12,6 @@ import { ROUTES } from '@/utils/constants/routes';
 import { DefectFixationEditForm } from './(components)/DefectFixationEditForm/DefectFixationEditForm';
 import DefectFixationTaskInfo from './(components)/DefectFixationTaskInfo/DefectFixationTaskInfo';
 import { useDefectFixationTaskPage } from './(hooks)/useDefectFixationTaskPage';
-import ContractorCard from '@/app/(auth)/fixation/defect/[defectId]/contractors/(components)/ContractorCard/ContractorCard';
 
 const DefectFixationPage = () => {
   const { state, functions } = useDefectFixationTaskPage();
@@ -26,9 +26,13 @@ const DefectFixationPage = () => {
 
       <div className='mb-3 mt-9 flex flex-col'>
         <DefectFixationTaskInfo data={state.data?.data} />
-        
+
         {!(!state.data?.data.defectFixation && state.data?.data.taskStatus === 'Created') && (
-          <Typography tag='p' variant='sub2' className='mt-4 pt-3 border-t-2 text-center text-gray-500'>
+          <Typography
+            tag='p'
+            variant='sub2'
+            className='mt-4 border-t-2 pt-3 text-center text-gray-500'
+          >
             Зафиксированный дефект
           </Typography>
         )}
@@ -52,7 +56,12 @@ const DefectFixationPage = () => {
           />
         )}
 
-        {state.data.data.defectFixation && <DefectFixationEditForm defect={state.data.data} onSaveAsync={functions.onDefectSaveAsync} />}
+        {state.data.data.defectFixation && (
+          <DefectFixationEditForm
+            defect={state.data.data}
+            onSaveAsync={functions.onDefectSaveAsync}
+          />
+        )}
 
         {!state.data.data.defectFixation && state.data.data.taskStatus === 'Processing' && (
           <Button
@@ -74,26 +83,26 @@ const DefectFixationPage = () => {
         finishButtonDisable={state.taskFinishDisable}
       />
 
-      {state.data.data.taskStatus === 'Completed' && state.data.data.defectFixation && !state.data.data.defectFixation.contractor && (
-        <Link href={ROUTES.FIXATION_DEFECT.CONTRACTORS(state.data.data.defectFixation.id)}>
-          <Button type='submit' size='lg' className='w-full'>
-            Выбрать подрячика для выполнения работ
-          </Button>
-        </Link>
-      )}
+      {state.data.data.taskStatus === 'Completed' &&
+        state.data.data.defectFixation &&
+        !state.data.data.defectFixation.contractor && (
+          <Link href={ROUTES.FIXATION_DEFECT.CONTRACTORS(state.data.data.defectFixation.id)}>
+            <Button type='submit' size='lg' className='w-full'>
+              Выбрать подрячика для выполнения работ
+            </Button>
+          </Link>
+        )}
 
-      {state.data.data.taskStatus === 'Completed' && state.data.data.defectFixation && state.data.data.defectFixation.contractor && (
-        <>
-          <Typography
-            tag='p'
-            variant='sub2'
-            className='text-center text-gray-500'
-          >
-            Подрядчик, назначенный на устранение дефекта
-          </Typography>
-          <ContractorCard contractor={state.data.data.defectFixation.contractor} />
-        </>        
-      )}
+      {state.data.data.taskStatus === 'Completed' &&
+        state.data.data.defectFixation &&
+        state.data.data.defectFixation.contractor && (
+          <>
+            <Typography tag='p' variant='sub2' className='text-center text-gray-500'>
+              Подрядчик, назначенный на устранение дефекта
+            </Typography>
+            <ContractorCard contractor={state.data.data.defectFixation.contractor} />
+          </>
+        )}
     </div>
   );
 };

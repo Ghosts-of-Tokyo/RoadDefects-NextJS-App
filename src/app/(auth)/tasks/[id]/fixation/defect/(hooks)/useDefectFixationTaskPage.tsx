@@ -42,7 +42,7 @@ export const useDefectFixationTaskPage = () => {
   };
 
   const onDefectSaveAsync = async () => {
-    queryClient.invalidateQueries({ queryKey: ['getFixationDefectTask', params.id] });
+    await queryClient.invalidateQueries({ queryKey: ['getFixationDefectTask', params.id] });
   };
 
   const taskFinishDisable: boolean =

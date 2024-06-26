@@ -3,17 +3,17 @@
 import { ChevronLeftIcon } from 'lucide-react';
 import Link from 'next/link';
 
+import ContractorCard from '@/app/(auth)/fixation/defect/[defectId]/contractors/(components)/ContractorCard/ContractorCard';
 import { Button, Typography } from '@/components/ui';
 import TaskStatusButtons from '@/features/inspectorTasks/components/TaskStatusButtons/TaskStatusButtons';
 import Photos from '@/features/photos/Photos';
+import { dateFormat } from '@/shared/helpers/dateFormate';
 import { ROUTES } from '@/utils/constants/routes';
 
 import { DefectFixationEditForm } from './(components)/DefectFixationEditForm/DefectFixationEditForm';
 import { FixationWorkEditForm } from './(components)/DefectWorkEditForm/FixationWorkEditForm';
 import WorkFixationTaskInfo from './(components)/WorkFixationTaskInfo/WorkFixationTaskInfo';
 import { useFixationWorkEditPage } from './(hooks)/useFixationWorkEditPage';
-import { dateFormat } from '@/shared/helpers/dateFormate';
-import ContractorCard from '@/app/(auth)/fixation/defect/[defectId]/contractors/(components)/ContractorCard/ContractorCard';
 
 const DefectWorkFixationPage = () => {
   const { state, functions } = useFixationWorkEditPage();
@@ -32,11 +32,11 @@ const DefectWorkFixationPage = () => {
         {/* <------------ fixationWork ------------> */}
 
         {!(!state.data?.data.fixationWork && state.data?.data.taskStatus === 'Created') && (
-          <Typography 
-            tag='p' 
-            variant='sub2' 
-            className='mt-4 pt-3 border-t-2 text-center text-gray-500'
-            >
+          <Typography
+            tag='p'
+            variant='sub2'
+            className='mt-4 border-t-2 pt-3 text-center text-gray-500'
+          >
             Зафиксированный факт выполнения работ
           </Typography>
         )}
@@ -77,11 +77,11 @@ const DefectWorkFixationPage = () => {
         {/* <------------ defectFixation ------------> */}
 
         {!(!state.data?.data.defectFixation && state.data?.data.taskStatus === 'Created') && (
-          <Typography 
-            tag='p' 
-            variant='sub2' 
-            className='mt-4 pt-3 border-t-2 text-center text-gray-500'
-            >
+          <Typography
+            tag='p'
+            variant='sub2'
+            className='mt-4 border-t-2 pt-3 text-center text-gray-500'
+          >
             Дефект обнаруженный в ходе проверки выполненных работ
           </Typography>
         )}
@@ -105,7 +105,9 @@ const DefectWorkFixationPage = () => {
           />
         )}
 
-        {state.data?.data.defectFixation && <DefectFixationEditForm defect={state.data.data} onSaveAsync={functions.onSaveAsync} />}
+        {state.data?.data.defectFixation && (
+          <DefectFixationEditForm defect={state.data.data} onSaveAsync={functions.onSaveAsync} />
+        )}
         {!state.data?.data.defectFixation && state.data?.data.taskStatus === 'Processing' && (
           <Button
             type='submit'
@@ -128,26 +130,26 @@ const DefectWorkFixationPage = () => {
         finishButtonDisable={state.taskFinishDisable}
       />
 
-      {state.data.data.taskStatus === 'Completed' && state.data.data.defectFixation && !state.data.data.defectFixation.contractor && (
-        <Link href={ROUTES.FIXATION_DEFECT.CONTRACTORS(state.data.data.defectFixation.id)}>
-          <Button type='submit' size='lg' className='w-full'>
-            Выбрать подрячика для выполнения работ
-          </Button>
-        </Link>
-      )}
+      {state.data.data.taskStatus === 'Completed' &&
+        state.data.data.defectFixation &&
+        !state.data.data.defectFixation.contractor && (
+          <Link href={ROUTES.FIXATION_DEFECT.CONTRACTORS(state.data.data.defectFixation.id)}>
+            <Button type='submit' size='lg' className='w-full'>
+              Выбрать подрячика для выполнения работ
+            </Button>
+          </Link>
+        )}
 
-      {state.data.data.taskStatus === 'Completed' && state.data.data.defectFixation && state.data.data.defectFixation.contractor && (
-        <>
-          <Typography
-            tag='p'
-            variant='sub2'
-            className='text-center text-gray-500'
-          >
-            Подрядчик, назначенный на устранение дефекта
-          </Typography>
-          <ContractorCard contractor={state.data.data.defectFixation.contractor} />
-        </>        
-      )}
+      {state.data.data.taskStatus === 'Completed' &&
+        state.data.data.defectFixation &&
+        state.data.data.defectFixation.contractor && (
+          <>
+            <Typography tag='p' variant='sub2' className='text-center text-gray-500'>
+              Подрядчик, назначенный на устранение дефекта
+            </Typography>
+            <ContractorCard contractor={state.data.data.defectFixation.contractor} />
+          </>
+        )}
     </div>
   );
 };

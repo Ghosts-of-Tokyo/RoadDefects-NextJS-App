@@ -19,9 +19,9 @@ import {
   SelectValue,
   Typography
 } from '@/components/ui';
+import { dateFormat } from '@/shared/helpers/dateFormate';
 
 import { useDefectFixationEditForm } from './hooks/useDefectFixationEditForm';
-import { dateFormat } from '@/shared/helpers/dateFormate';
 
 interface DefectFixationEditFormProps {
   defect: FixationWorkTaskDTO;
