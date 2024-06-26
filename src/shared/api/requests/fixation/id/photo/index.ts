@@ -15,6 +15,19 @@ export const postFixationPhoto = async ({
     headers: { 'Content-Type': 'multipart/form-data' }
   });
 
+export type DeleteFixationPhotoConfigParams = {
+  fixationId: string;
+  photoId: string;
+};
+
+export type DeleteFixationPhotoConfigRequestConfig = RequestConfig<DeleteFixationPhotoConfigParams>;
+
+export const deleteFixationPhoto = async ({
+  config,
+  params
+}: DeleteFixationPhotoConfigRequestConfig) =>
+  instance.delete(`/fixation/${params.fixationId}/photo/${params.photoId}`, config);
+
 export type GetFixationPhotoConfigParams = {
   id: string;
   photoId: string;

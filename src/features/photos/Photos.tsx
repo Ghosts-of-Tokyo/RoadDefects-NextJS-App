@@ -1,12 +1,16 @@
 'use client';
 
-import Image from 'next/image';
-import { Button, ScrollArea, ScrollBar } from '@/components/ui';
-import { baseurl } from '@/utils/constants/baseUrl';
-import { Trash2Icon } from 'lucide-react';
-import { PhotoInfoDTO } from '@generated/api';
-import { ImagesDialog } from './components/ImagesDialog/ImagesDialog';
+import type { PhotoInfoDTO } from '@generated/api';
 import { useQueryClient } from '@tanstack/react-query';
+import { Trash2Icon } from 'lucide-react';
+import Image from 'next/image';
+import { toast } from 'sonner';
+
+import { Button, ScrollArea, ScrollBar } from '@/components/ui';
+import { useDeleteFixationPhotoMutation } from '@/shared/api/hooks';
+import { baseurl } from '@/utils/constants/baseUrl';
+
+import { ImagesDialog } from './components/ImagesDialog/ImagesDialog';
 
 interface IPhotos {
   taskId: string;
@@ -31,11 +35,24 @@ const Photos = ({
 }: IPhotos) => {
   const queryClient = useQueryClient();
 
+  const deleteFixationPhotoMutation = useDeleteFixationPhotoMutation();
+
+  const onFixationPhotoDelete = (fixationId: string, photoId: string) => {
+    deleteFixationPhotoMutation.mutateAsync({ params: { fixationId, photoId } });
+
+    queryClient.invalidateQueries({
+      queryKey: [isFixationDefectTask ? 'getFixationDefectTask' : 'getFixationWorkTask', taskId]
+    });
+
+    toast.success('Фото успешно удалено');
+  };
+
   const onAdded = () => {
     queryClient.invalidateQueries({
       queryKey: [isFixationDefectTask ? 'getFixationDefectTask' : 'getFixationWorkTask', taskId]
     });
   };
+
   return (
     <>
       <div>
@@ -50,11 +67,16 @@ const Photos = ({
                     src={`${baseurl}/${photo.pathName}`}
                     alt='photo'
                   />
-                  {}
                   {!disable && (
-                    <div className='absolute right-2 top-2 z-50 rounded-full bg-slate-400'>
+                    <Button
+                      type='button'
+                      variant='outline'
+                      size='icon'
+                      className='z-50 absolute right-2 top-2 rounded-full bg-slate-400 hover:bg-slate-400'
+                      onClick={() => onFixationPhotoDelete(fixationId, photo.id)}
+                    >
                       <Trash2Icon className='m-2 stroke-white' />
-                    </div>
+                    </Button>
                   )}
                 </div>
               ))}
@@ -82,4 +104,3 @@ const Photos = ({
 };
 
 export default Photos;
-

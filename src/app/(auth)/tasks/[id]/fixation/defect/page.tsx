@@ -1,11 +1,17 @@
 'use client';
 
-import DefectFixationTaskInfo from './(components)/DefectFixationTaskInfo/DefectFixationTaskInfo';
-import { useDefectFixationTaskPage } from './(hooks)/useDefectFixationTaskPage';
+import { ChevronLeftIcon } from 'lucide-react';
+import Link from 'next/link';
+
 import { Button, Typography } from '@/components/ui';
-import { DefectFixationEditForm } from './(components)/DefectFixationEditForm/DefectFixationEditForm';
 import TaskStatusButtons from '@/features/inspectorTasks/components/TaskStatusButtons/TaskStatusButtons';
 import Photos from '@/features/photos/Photos';
+import { ROUTES } from '@/utils/constants/routes';
+
+import { DefectFixationEditForm } from './(components)/DefectFixationEditForm/DefectFixationEditForm';
+import DefectFixationTaskInfo from './(components)/DefectFixationTaskInfo/DefectFixationTaskInfo';
+import { useDefectFixationTaskPage } from './(hooks)/useDefectFixationTaskPage';
+import ContractorCard from '@/app/(auth)/fixation/defect/[defectId]/contractors/(components)/ContractorCard/ContractorCard';
 
 const DefectFixationPage = () => {
   const { state, functions } = useDefectFixationTaskPage();
@@ -14,12 +20,18 @@ const DefectFixationPage = () => {
 
   return (
     <div className='flex h-full flex-col justify-between p-5'>
-      <div className='flex flex-col mb-3'>
-        <DefectFixationTaskInfo data={state.data?.data}/>
+      <Link href={ROUTES.TASKS.ROOT} className='absolute'>
+        <ChevronLeftIcon className='size-8 rounded-md border' />
+      </Link>
 
-        <Typography tag='p' variant='sub2' className='mt-4 pt-3 border-t-2 text-center text-gray-500'>
-          Зафиксированный дефект
-        </Typography>
+      <div className='mb-3 mt-9 flex flex-col'>
+        <DefectFixationTaskInfo data={state.data?.data} />
+        
+        {!(!state.data?.data.defectFixation && state.data?.data.taskStatus === 'Created') && (
+          <Typography tag='p' variant='sub2' className='mt-4 pt-3 border-t-2 text-center text-gray-500'>
+            Зафиксированный дефект
+          </Typography>
+        )}
 
         {state.data.data.defectStatus === 'ThereIsNotDefect' && (
           <Typography tag='p' variant='sub3' className='my-1 text-center'>
@@ -28,7 +40,7 @@ const DefectFixationPage = () => {
         )}
 
         {state.data.data.defectFixation && state.data.data.defectFixation.photos && (
-          <Photos 
+          <Photos
             taskId={state.data.data.id}
             fixationId={state.data.data.defectFixation.id}
             photos={state.data.data.defectFixation.photos}
@@ -36,11 +48,11 @@ const DefectFixationPage = () => {
             onAddClick={functions.onEditClick}
             onEditCloselick={functions.onEditCloseClick}
             imageDialogOpen={state.imageDialogOpen}
-            isFixationDefectTask={true}
+            isFixationDefectTask
           />
         )}
 
-        {state.data.data.defectFixation && <DefectFixationEditForm defect={state.data.data} />}
+        {state.data.data.defectFixation && <DefectFixationEditForm defect={state.data.data} onSaveAsync={functions.onDefectSaveAsync} />}
 
         {!state.data.data.defectFixation && state.data.data.taskStatus === 'Processing' && (
           <Button
@@ -55,11 +67,33 @@ const DefectFixationPage = () => {
         )}
       </div>
 
-      <TaskStatusButtons 
-          taskStatus={state.data.data.taskStatus}
-          onUpdateTaskStatusClick={functions.onUpdateTaskStatusClick}
-          updateTaskStatus={state.isLoading.updateTaskStatus}
-        />
+      <TaskStatusButtons
+        taskStatus={state.data.data.taskStatus}
+        onUpdateTaskStatusClick={functions.onUpdateTaskStatusClick}
+        updateTaskStatus={state.isLoading.updateTaskStatus}
+        finishButtonDisable={state.taskFinishDisable}
+      />
+
+      {state.data.data.taskStatus === 'Completed' && state.data.data.defectFixation && !state.data.data.defectFixation.contractor && (
+        <Link href={ROUTES.FIXATION_DEFECT.CONTRACTORS(state.data.data.defectFixation.id)}>
+          <Button type='submit' size='lg' className='w-full'>
+            Выбрать подрячика для выполнения работ
+          </Button>
+        </Link>
+      )}
+
+      {state.data.data.taskStatus === 'Completed' && state.data.data.defectFixation && state.data.data.defectFixation.contractor && (
+        <>
+          <Typography
+            tag='p'
+            variant='sub2'
+            className='text-center text-gray-500'
+          >
+            Подрядчик, назначенный на устранение дефекта
+          </Typography>
+          <ContractorCard contractor={state.data.data.defectFixation.contractor} />
+        </>        
+      )}
     </div>
   );
 };

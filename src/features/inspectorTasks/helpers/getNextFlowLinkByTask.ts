@@ -20,16 +20,16 @@ export const getNextFlowLinkByTask = (task: TaskDTO) => {
   }
 
   if (task.taskType === 'FixationWorkTask') {
-      // if (task.taskStatus === 'Created') {
-      //   return ROUTES.TASKS.FIXATION.WORK.ROOT(task.id);
-      // }
-      
-      // if (task.taskStatus === 'Processing') {
-      //     return ROUTES.TASKS.FIXATION.WORK.EDIT(task.id);
-      // }
+    // if (task.taskStatus === 'Created') {
+    //   return ROUTES.TASKS.FIXATION.WORK.ROOT(task.id);
+    // }
 
-      return ROUTES.TASKS.FIXATION.WORK.ROOT(task.id);
-    }
+    // if (task.taskStatus === 'Processing') {
+    //     return ROUTES.TASKS.FIXATION.WORK.EDIT(task.id);
+    // }
+
+    return ROUTES.TASKS.FIXATION.WORK.ROOT(task.id);
+  }
 
   return ROUTES.TASKS.ROOT;
 };

@@ -1,19 +1,19 @@
+import { useState } from 'react';
+import type { ChangeTaskStatusEnum } from '@generated/api';
+import { useQueryClient } from '@tanstack/react-query';
+import { useParams } from 'next/navigation';
+import { toast } from 'sonner';
+
 import {
   useGetFixationWorkTaskQuery,
   usePostFixationDefectMutation,
   usePostFixationWorkMutation,
   usePostTaskMutation
 } from '@/shared/api/hooks';
-import { ROUTES } from '@/utils/constants/routes';
-import { ChangeTaskStatusEnum } from '@generated/api';
-import { useQueryClient } from '@tanstack/react-query';
-import { useParams, useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { toast } from 'sonner';
 
 export const useFixationWorkEditPage = () => {
   const params = useParams<{ id: string }>();
-  const router = useRouter();
+
   const queryClient = useQueryClient();
 
   const [imageDialogOpen, setImageDialogOpen] = useState(false);
@@ -63,6 +63,13 @@ export const useFixationWorkEditPage = () => {
     toast.success('Фиксация выполненных работ создана');
   };
 
+  const onSaveAsync = async () => {
+    queryClient.invalidateQueries({ queryKey: ['getFixationWorkTask', params.id] });
+  }
+
+  const taskFinishDisable : boolean = (data?.data.defectFixation ?? false) && (!data?.data.defectFixation.defectType || !data.data.defectFixation.damagedCanvasSquareMeter) ||
+                                      (!data?.data.fixationWork || (data?.data.fixationWork ?? false) && data?.data?.fixationWork.workDone === null);
+
   return {
     state: {
       data,
@@ -72,7 +79,8 @@ export const useFixationWorkEditPage = () => {
         updateTaskStatus: postTaskMutation.isPending
       },
       imageDialogOpen,
-      imageDialogWorkOpen
+      imageDialogWorkOpen,
+      taskFinishDisable
     },
     functions: {
       onUpdateTaskStatusClick,
@@ -84,6 +92,7 @@ export const useFixationWorkEditPage = () => {
 
       onEditClick,
       onEditCloseClick,
+      onSaveAsync
     }
   };
 };

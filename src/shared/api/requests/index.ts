@@ -1,4 +1,6 @@
+export * from './assignment';
 export * from './auth/login';
+export * from './contractor/contractors';
 export * from './defect_type';
 export * from './fixation/id/photo';
 export * from './fixation_defect';

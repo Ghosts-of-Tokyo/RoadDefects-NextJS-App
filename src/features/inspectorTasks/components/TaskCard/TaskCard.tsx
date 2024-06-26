@@ -1,11 +1,18 @@
-import { Typography } from '@/components/ui/typography';
-import { TaskDTO } from '@generated/api';
-import { getTaskStatusColor, getTaskStatusText } from '@/shared/helpers/getTaskStatusColor';
-import { cn } from '@/lib/utils';
+import type { TaskDTO } from '@generated/api';
 import Link from 'next/link';
-import { getNextFlowLinkByTask } from '../../helpers/getNextFlowLinkByTask';
 
-export const TaskCard = (task: TaskDTO) => (
+import { Typography } from '@/components/ui/typography';
+import { cn } from '@/lib/utils';
+import { getTaskStatusColor, getTaskStatusText } from '@/shared/helpers/getTaskStatusColor';
+
+import { getNextFlowLinkByTask } from '../../helpers/getNextFlowLinkByTask';
+import { dateFormat } from '@/shared/helpers/dateFormate';
+
+interface TaskCardProps {
+  task: TaskDTO;
+}
+
+export const TaskCard = ({ task }: TaskCardProps) => (
   <Link href={getNextFlowLinkByTask(task)}>
     <div className='border-b-2 p-4'>
       <div className='flex justify-between'>
@@ -21,15 +28,15 @@ export const TaskCard = (task: TaskDTO) => (
         {task.address}
       </Typography>
       <Typography tag='p' variant='sub3'>
-        {new Date(task.createdDateTime).toLocaleString()}
+        {dateFormat(new Date(task.createdDateTime))}
       </Typography>
       {task.defectStatus === 'ThereIsDefect' && (
-        <Typography tag='p' variant='sub3'>
+        <Typography tag='p' variant='sub3' style={{color: '#777'}}>
           Дефект зафиксирован
         </Typography>
       )}
       {task.defectStatus === 'ThereIsNotDefect' && (
-        <Typography tag='p' variant='sub3' style={{color: '#777'}}>
+        <Typography tag='p' variant='sub3' style={{ color: '#777' }}>
           Дефект не обнаружен
         </Typography>
       )}

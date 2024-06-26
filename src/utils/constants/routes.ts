@@ -16,6 +16,9 @@ export const ROUTES = {
       }
     }
   },
-
+  FIXATION_DEFECT: {
+    ROOT: (defectId: string) => `/fixation/defect/${defectId}`,
+    CONTRACTORS: (defectId: string) => `/fixation/defect/${defectId}/contractors`
+  },
   LOGIN: '/login'
 };

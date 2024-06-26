@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import type { FixationDefectTaskDTO } from '@generated/api';
 
 import {
   Button,
@@ -18,15 +19,17 @@ import {
   SelectValue,
   Typography
 } from '@/components/ui';
+
 import { useDefectFixationEditForm } from './hooks/useDefectFixationEditForm';
-import { FixationDefectTaskDTO } from '@generated/api';
+import { dateFormat } from '@/shared/helpers/dateFormate';
 
 interface DefectFixationEditFormProps {
   defect: FixationDefectTaskDTO;
+  onSaveAsync: () => void;
 }
 
-export const DefectFixationEditForm = ({ defect }: DefectFixationEditFormProps) => {
-  const { state, form, functions } = useDefectFixationEditForm({ defect });
+export const DefectFixationEditForm = ({ defect, onSaveAsync }: DefectFixationEditFormProps) => {
+  const { state, form, functions } = useDefectFixationEditForm({ defect, onSaveAsync});
 
   return (
     <Form {...form}>
@@ -91,6 +94,9 @@ export const DefectFixationEditForm = ({ defect }: DefectFixationEditFormProps) 
                   </FormItem>
                 )}
               />
+              <Typography tag='p' variant='sub4' className='my-1'>
+                Зафиксировано {dateFormat(new Date(defect.defectFixation.recordedDateTime))}
+              </Typography>
             </div>
           </div>
           {defect.taskStatus === 'Processing' && (
