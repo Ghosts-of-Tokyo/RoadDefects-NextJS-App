@@ -4,13 +4,13 @@ import type { PhotoInfoDTO } from '@generated/api';
 import { useQueryClient } from '@tanstack/react-query';
 import { Trash2Icon } from 'lucide-react';
 import Image from 'next/image';
+import { toast } from 'sonner';
 
 import { Button, ScrollArea, ScrollBar } from '@/components/ui';
+import { useDeleteFixationPhotoMutation } from '@/shared/api/hooks';
 import { baseurl } from '@/utils/constants/baseUrl';
 
 import { ImagesDialog } from './components/ImagesDialog/ImagesDialog';
-import { useDeleteFixationPhotoMutation } from '@/shared/api/hooks';
-import { toast } from 'sonner';
 
 interface IPhotos {
   taskId: string;

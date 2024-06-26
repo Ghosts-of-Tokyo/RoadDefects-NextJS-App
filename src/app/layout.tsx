@@ -9,6 +9,7 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
+  manifest: '/manifest.json',
   title: 'Road defects',
   description: 'Приложение для мониторинга дорожных дефектов'
 };
