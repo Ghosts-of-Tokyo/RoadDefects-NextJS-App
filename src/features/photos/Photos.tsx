@@ -37,14 +37,21 @@ const Photos = ({
 
   const deleteFixationPhotoMutation = useDeleteFixationPhotoMutation();
 
-  const onFixationPhotoDelete = (fixationId: string, photoId: string) => {
-    deleteFixationPhotoMutation.mutateAsync({ params: { fixationId, photoId } });
-
-    queryClient.invalidateQueries({
-      queryKey: [isFixationDefectTask ? 'getFixationDefectTask' : 'getFixationWorkTask', taskId]
-    });
-
-    toast.success('Фото успешно удалено');
+  const onFixationPhotoDelete = async (fixationId: string, photoId: string) => {
+    await deleteFixationPhotoMutation.mutateAsync(
+      { params: { fixationId, photoId } },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: [
+              isFixationDefectTask ? 'getFixationDefectTask' : 'getFixationWorkTask',
+              taskId
+            ]
+          });
+          toast.success('Фото успешно удалено');
+        }
+      }
+    );
   };
 
   const onAdded = () => {

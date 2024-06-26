@@ -43,9 +43,11 @@ export const useDefectFixationTaskPage = () => {
 
   const onDefectSaveAsync = async () => {
     queryClient.invalidateQueries({ queryKey: ['getFixationDefectTask', params.id] });
-  }
+  };
 
-  const taskFinishDisable : boolean = (data?.data.defectFixation ?? false) && (!data?.data.defectFixation.defectType || !data.data.defectFixation.damagedCanvasSquareMeter);
+  const taskFinishDisable: boolean =
+    (data?.data.defectFixation ?? false) &&
+    (!data?.data.defectFixation.defectType || !data.data.defectFixation.damagedCanvasSquareMeter);
 
   return {
     state: {

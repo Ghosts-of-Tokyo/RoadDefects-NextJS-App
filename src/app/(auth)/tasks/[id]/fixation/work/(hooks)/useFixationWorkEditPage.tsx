@@ -65,10 +65,14 @@ export const useFixationWorkEditPage = () => {
 
   const onSaveAsync = async () => {
     queryClient.invalidateQueries({ queryKey: ['getFixationWorkTask', params.id] });
-  }
+  };
 
-  const taskFinishDisable : boolean = (data?.data.defectFixation ?? false) && (!data?.data.defectFixation.defectType || !data.data.defectFixation.damagedCanvasSquareMeter) ||
-                                      (!data?.data.fixationWork || (data?.data.fixationWork ?? false) && data?.data?.fixationWork.workDone === null);
+  const taskFinishDisable: boolean =
+    ((data?.data.defectFixation ?? false) &&
+      (!data?.data.defectFixation.defectType ||
+        !data.data.defectFixation.damagedCanvasSquareMeter)) ||
+    !data?.data.fixationWork ||
+    ((data?.data.fixationWork ?? false) && data?.data?.fixationWork.workDone === null);
 
   return {
     state: {
