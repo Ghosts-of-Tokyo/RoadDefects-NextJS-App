@@ -5,6 +5,7 @@ import type { FixationDefectTaskDTO } from '@generated/api';
 import { Typography } from '@/components/ui/typography';
 import { cn } from '@/lib/utils';
 import { getTaskStatusColor, getTaskStatusText } from '@/shared/helpers/getTaskStatusColor';
+import { dateFormat } from '@/shared/helpers/dateFormate';
 
 interface IDefectFixationTaskInfo {
   data: FixationDefectTaskDTO;
@@ -28,7 +29,7 @@ const DefectFixationTaskInfo = ({ data }: IDefectFixationTaskInfo) => (
         {data.address}
       </Typography>
       <Typography tag='p' variant='sub3'>
-        {new Date(data.createdDateTime).toLocaleString()}
+        Создано {dateFormat(new Date(data.createdDateTime))}
       </Typography>
 
       <div className='mt-3 space-y-2'>

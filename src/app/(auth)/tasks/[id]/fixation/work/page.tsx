@@ -12,6 +12,8 @@ import { DefectFixationEditForm } from './(components)/DefectFixationEditForm/De
 import { FixationWorkEditForm } from './(components)/DefectWorkEditForm/FixationWorkEditForm';
 import WorkFixationTaskInfo from './(components)/WorkFixationTaskInfo/WorkFixationTaskInfo';
 import { useFixationWorkEditPage } from './(hooks)/useFixationWorkEditPage';
+import { dateFormat } from '@/shared/helpers/dateFormate';
+import ContractorCard from '@/app/(auth)/fixation/defect/[defectId]/contractors/(components)/ContractorCard/ContractorCard';
 
 const DefectWorkFixationPage = () => {
   const { state, functions } = useFixationWorkEditPage();
@@ -29,13 +31,15 @@ const DefectWorkFixationPage = () => {
 
         {/* <------------ fixationWork ------------> */}
 
-        <Typography
-          tag='p'
-          variant='sub2'
-          className='mt-4 border-t-2 pt-3 text-center text-gray-500'
-        >
-          Зафиксированный факт выполнения работ
-        </Typography>
+        {!(!state.data?.data.fixationWork && state.data?.data.taskStatus === 'Created') && (
+          <Typography 
+            tag='p' 
+            variant='sub2' 
+            className='mt-4 pt-3 border-t-2 text-center text-gray-500'
+            >
+            Зафиксированный факт выполнения работ
+          </Typography>
+        )}
 
         {state.data.data.fixationWork && state.data.data.fixationWork.photos && (
           <Photos
@@ -54,8 +58,7 @@ const DefectWorkFixationPage = () => {
           <>
             <FixationWorkEditForm defect={state.data.data} onSaveAsync={functions.onSaveAsync} />
             <Typography tag='p' variant='sub4' className='my-1'>
-              Зафиксировано в{' '}
-              {new Date(state.data.data.fixationWork.recordedDateTime).toLocaleString()}
+              Зафиксировано {dateFormat(new Date(state.data.data.fixationWork.recordedDateTime))}
             </Typography>
           </>
         )}
@@ -73,13 +76,15 @@ const DefectWorkFixationPage = () => {
 
         {/* <------------ defectFixation ------------> */}
 
-        <Typography
-          tag='p'
-          variant='sub2'
-          className='mt-4 border-t-2 pt-3 text-center text-gray-500'
-        >
-          Дефект обнаруженный в ходе проверки выполненных работ
-        </Typography>
+        {!(!state.data?.data.defectFixation && state.data?.data.taskStatus === 'Created') && (
+          <Typography 
+            tag='p' 
+            variant='sub2' 
+            className='mt-4 pt-3 border-t-2 text-center text-gray-500'
+            >
+            Дефект обнаруженный в ходе проверки выполненных работ
+          </Typography>
+        )}
 
         {state.data.data.defectStatus === 'ThereIsNotDefect' && (
           <Typography tag='p' variant='sub3' className='my-1 text-center'>
@@ -122,6 +127,27 @@ const DefectWorkFixationPage = () => {
         updateTaskStatus={state.isLoading.updateTaskStatus}
         finishButtonDisable={state.taskFinishDisable}
       />
+
+      {state.data.data.taskStatus === 'Completed' && state.data.data.defectFixation && !state.data.data.defectFixation.contractor && (
+        <Link href={ROUTES.FIXATION_DEFECT.CONTRACTORS(state.data.data.defectFixation.id)}>
+          <Button type='submit' size='lg' className='w-full'>
+            Выбрать подрячика для выполнения работ
+          </Button>
+        </Link>
+      )}
+
+      {state.data.data.taskStatus === 'Completed' && state.data.data.defectFixation && state.data.data.defectFixation.contractor && (
+        <>
+          <Typography
+            tag='p'
+            variant='sub2'
+            className='text-center text-gray-500'
+          >
+            Подрядчик, назначенный на устранение дефекта
+          </Typography>
+          <ContractorCard contractor={state.data.data.defectFixation.contractor} />
+        </>        
+      )}
     </div>
   );
 };

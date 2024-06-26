@@ -4,10 +4,13 @@
  * RoadDefectsService.Presentation.Web
  * OpenAPI spec version: 1.0
  */
+import type { ContractorDTO } from './contractorDTO';
 import type { DefectTypeDTO } from './defectTypeDTO';
 import type { PhotoInfoDTO } from './photoInfoDTO';
 
 export interface FixationDefectDTO {
+  /** @nullable */
+  contractor: ContractorDTO | null;
   /** @nullable */
   address: string | null;
   /** @nullable */

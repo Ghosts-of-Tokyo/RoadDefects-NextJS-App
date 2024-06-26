@@ -21,6 +21,7 @@ import {
 } from '@/components/ui';
 
 import { useDefectFixationEditForm } from './hooks/useDefectFixationEditForm';
+import { dateFormat } from '@/shared/helpers/dateFormate';
 
 interface DefectFixationEditFormProps {
   defect: FixationDefectTaskDTO;
@@ -93,6 +94,9 @@ export const DefectFixationEditForm = ({ defect, onSaveAsync }: DefectFixationEd
                   </FormItem>
                 )}
               />
+              <Typography tag='p' variant='sub4' className='my-1'>
+                Зафиксировано {dateFormat(new Date(defect.defectFixation.recordedDateTime))}
+              </Typography>
             </div>
           </div>
           {defect.taskStatus === 'Processing' && (

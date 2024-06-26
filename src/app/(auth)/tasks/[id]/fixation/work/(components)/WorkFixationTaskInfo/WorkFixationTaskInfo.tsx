@@ -5,6 +5,7 @@ import type { FixationWorkTaskDTO } from '@generated/api';
 import { Typography } from '@/components/ui';
 import { cn } from '@/lib/utils';
 import { getTaskStatusColor, getTaskStatusText } from '@/shared/helpers/getTaskStatusColor';
+import { dateFormat } from '@/shared/helpers/dateFormate';
 
 interface IWorkFixationTaskInfo {
   data: FixationWorkTaskDTO;
@@ -28,7 +29,7 @@ const WorkFixationTaskInfo = ({ data }: IWorkFixationTaskInfo) => (
         {data.address}
       </Typography>
       <Typography tag='p' variant='sub3'>
-        {new Date(data.createdDateTime).toLocaleString()}
+        Создано {dateFormat(new Date(data.createdDateTime))}
       </Typography>
     </div>
   </div>
