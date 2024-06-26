@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 import { getTaskStatusColor, getTaskStatusText } from '@/shared/helpers/getTaskStatusColor';
 import Link from 'next/link';
 import { getNextFlowLinkByTask } from '@/features/inspectorTasks/helpers/getNextFlowLinkByTask';
+import { dateFormat } from '@/shared/helpers/dateFormate';
 
 interface IWorkFixationTaskInfo {
   data: FixationWorkTaskDTO;
@@ -30,7 +31,7 @@ const WorkFixationTaskInfo = ({ data }: IWorkFixationTaskInfo) => (
         {data.address}
       </Typography>
       <Typography tag='p' variant='sub3'>
-        {new Date(data.createdDateTime).toLocaleString()}
+        Создано {dateFormat(new Date(data.createdDateTime))}
       </Typography>
     </div>
 
