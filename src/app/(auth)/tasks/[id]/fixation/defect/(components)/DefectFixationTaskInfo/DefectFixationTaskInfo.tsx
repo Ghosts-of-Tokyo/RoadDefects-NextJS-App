@@ -1,9 +1,11 @@
 'use client';
 
+import type { FixationDefectTaskDTO } from '@generated/api';
+import { StatusTask } from '@generated/api';
+
 import { Typography } from '@/components/ui/typography';
 import { cn } from '@/lib/utils';
 import { getTaskStatusColor, getTaskStatusText } from '@/shared/helpers/getTaskStatusColor';
-import { FixationDefectTaskDTO, StatusTask } from '@generated/api';
 
 interface IDefectFixationTaskInfo {
   data: FixationDefectTaskDTO;
@@ -20,7 +22,7 @@ const DefectFixationTaskInfo = ({ data }: IDefectFixationTaskInfo) => (
           Фиксация дефекта
         </Typography>
         <Typography tag='h5' variant='h7' className={cn(getTaskStatusColor(data.taskStatus))}>
-          {getTaskStatusText(data.taskStatus!)}
+          {getTaskStatusText(data.taskStatus)}
         </Typography>
       </div>
       <Typography tag='p' variant='sub3' className='my-1'>
@@ -46,4 +48,3 @@ const DefectFixationTaskInfo = ({ data }: IDefectFixationTaskInfo) => (
 );
 
 export default DefectFixationTaskInfo;
-

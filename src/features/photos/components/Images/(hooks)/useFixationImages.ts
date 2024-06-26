@@ -14,7 +14,11 @@ interface UseDefectFixationImagesParams {
   onAdded: () => void;
 }
 
-export const useFixationImages = ({ taskId, fixationId, onAdded }: UseDefectFixationImagesParams) => {
+export const useFixationImages = ({
+  taskId,
+  fixationId,
+  onAdded
+}: UseDefectFixationImagesParams) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const postFixationPhotoMutation = usePostFixationPhotoMutation();
@@ -26,6 +30,8 @@ export const useFixationImages = ({ taskId, fixationId, onAdded }: UseDefectFixa
       file: undefined
     }
   });
+
+  console.log(taskId);
 
   const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {

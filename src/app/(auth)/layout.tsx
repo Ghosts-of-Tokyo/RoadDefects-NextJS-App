@@ -1,6 +1,7 @@
 'use client';
 
 import LoadingSpinner from '@/features/loadingSpiner/loadingSpinner';
+
 import { useLayout } from './useLayout';
 
 const AuthLayout = ({
@@ -10,8 +11,7 @@ const AuthLayout = ({
 }>) => {
   const { state } = useLayout();
 
-  if (state.isLoading) 
-    return <LoadingSpinner />;
+  if (state.isLoading) return <LoadingSpinner />;
 
   return <>{children}</>;
 };

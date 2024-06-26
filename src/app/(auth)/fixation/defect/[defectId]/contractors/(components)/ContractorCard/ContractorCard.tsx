@@ -1,10 +1,12 @@
 'use client';
 
+import type { ContractorDTO } from '@generated/api';
+
 import { Typography } from '@/components/ui';
 
-import { ContractorDTO } from '@generated/api';
-import { useContractorCard } from './(hooks)/useContractorCard';
 import { ContractorDialog } from '../ContractorDialog/ContractorDialog';
+
+import { useContractorCard } from './(hooks)/useContractorCard';
 
 interface ContractorCardProps {
   contractor: ContractorDTO;

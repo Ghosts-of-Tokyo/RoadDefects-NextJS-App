@@ -1,7 +1,8 @@
 'use client';
 
+import type { ChangeTaskStatusEnum, StatusTask } from '@generated/api';
+
 import { Button } from '@/components/ui';
-import { ChangeTaskStatusEnum, StatusTask } from '@generated/api';
 
 interface ITaskStatusButtons {
   taskStatus: StatusTask;
@@ -56,4 +57,3 @@ const TaskStatusButtons = ({
 };
 
 export default TaskStatusButtons;
-

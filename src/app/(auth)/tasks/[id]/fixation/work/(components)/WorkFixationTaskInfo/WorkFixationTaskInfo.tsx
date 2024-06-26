@@ -1,9 +1,10 @@
 'use client';
 
+import type { FixationWorkTaskDTO } from '@generated/api';
+
 import { Typography } from '@/components/ui';
 import { cn } from '@/lib/utils';
 import { getTaskStatusColor, getTaskStatusText } from '@/shared/helpers/getTaskStatusColor';
-import { FixationWorkTaskDTO } from '@generated/api';
 
 interface IWorkFixationTaskInfo {
   data: FixationWorkTaskDTO;
@@ -20,7 +21,7 @@ const WorkFixationTaskInfo = ({ data }: IWorkFixationTaskInfo) => (
           Фиксация выполненных работ
         </Typography>
         <Typography tag='h5' variant='h7' className={cn(getTaskStatusColor(data.taskStatus))}>
-          {getTaskStatusText(data.taskStatus!)}
+          {getTaskStatusText(data.taskStatus)}
         </Typography>
       </div>
       <Typography tag='p' variant='sub3' className='my-1'>
@@ -34,4 +35,3 @@ const WorkFixationTaskInfo = ({ data }: IWorkFixationTaskInfo) => (
 );
 
 export default WorkFixationTaskInfo;
-

@@ -1,9 +1,10 @@
 'use client';
 
 import React from 'react';
+import type { ContractorDTO } from '@generated/api';
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, Typography } from '@/components/ui';
-import { ContractorDTO } from '@generated/api';
+
 import { ContractorAssignForm } from '../ContractorAssignForm/ContractorAssignForm';
 
 interface ContractorDialogProps extends React.ComponentProps<typeof Dialog> {

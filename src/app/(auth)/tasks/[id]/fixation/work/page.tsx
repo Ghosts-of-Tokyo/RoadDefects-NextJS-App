@@ -1,15 +1,17 @@
 'use client';
 
-import TaskStatusButtons from '@/features/inspectorTasks/components/TaskStatusButtons/TaskStatusButtons';
-import { useFixationWorkEditPage } from './(hooks)/useFixationWorkEditPage';
-import WorkFixationTaskInfo from './(components)/WorkFixationTaskInfo/WorkFixationTaskInfo';
-import { Button, Typography } from '@/components/ui';
-import { FixationWorkEditForm } from './(components)/DefectWorkEditForm/FixationWorkEditForm';
-import { DefectFixationEditForm } from './(components)/DefectFixationEditForm/DefectFixationEditForm';
-import Photos from '@/features/photos/Photos';
 import { ChevronLeftIcon } from 'lucide-react';
 import Link from 'next/link';
+
+import { Button, Typography } from '@/components/ui';
+import TaskStatusButtons from '@/features/inspectorTasks/components/TaskStatusButtons/TaskStatusButtons';
+import Photos from '@/features/photos/Photos';
 import { ROUTES } from '@/utils/constants/routes';
+
+import { DefectFixationEditForm } from './(components)/DefectFixationEditForm/DefectFixationEditForm';
+import { FixationWorkEditForm } from './(components)/DefectWorkEditForm/FixationWorkEditForm';
+import WorkFixationTaskInfo from './(components)/WorkFixationTaskInfo/WorkFixationTaskInfo';
+import { useFixationWorkEditPage } from './(hooks)/useFixationWorkEditPage';
 
 const DefectWorkFixationPage = () => {
   const { state, functions } = useFixationWorkEditPage();

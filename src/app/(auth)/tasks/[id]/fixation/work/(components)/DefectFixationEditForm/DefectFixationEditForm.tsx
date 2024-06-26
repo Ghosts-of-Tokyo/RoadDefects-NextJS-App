@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import type { FixationWorkTaskDTO } from '@generated/api';
 
 import {
   Button,
@@ -18,8 +19,8 @@ import {
   SelectValue,
   Typography
 } from '@/components/ui';
+
 import { useDefectFixationEditForm } from './hooks/useDefectFixationEditForm';
-import { FixationWorkTaskDTO } from '@generated/api';
 
 interface DefectFixationEditFormProps {
   defect: FixationWorkTaskDTO;
@@ -103,4 +104,3 @@ export const DefectFixationEditForm = ({ defect }: DefectFixationEditFormProps) 
     </Form>
   );
 };
-
